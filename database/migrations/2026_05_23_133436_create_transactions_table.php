@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            // CORRECTION : 'user_id' au lieu de 'users', lié explicitement à la table 'users'
+            // Remplacer foreignId par foreignUuid si la table users utilise des UUID
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('code')->unique();
-            $table->decimal('amount', 10, 2)->nullable();
-            $table->string('currency')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->string('currency', 10);
             $table->string('phone')->nullable();
-            $table->enum('payment_method', ['mobile', 'card'])->nullable();
             $table->string('order_number')->nullable();
-            $table->foreignId('bundle_id')->constrained('bundles')->cascadeOnDelete();
-            $table->enum('status', ['pending', 'success', 'failed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'success', 'failed'])->default('pending');
+            $table->string('payment_method');
             $table->timestamps();
         });
     }

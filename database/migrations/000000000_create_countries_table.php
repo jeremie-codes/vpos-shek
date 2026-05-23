@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('merchant_users', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('email')->unique();
+            $table->string('code')->nullable();
             $table->string('name')->nullable();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->foreignId('merchant_id')->constrained('merchants')->cascadeOnDelete();
+            $table->string('country_code')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('iso_code')->nullable();
+            $table->string('iso_cod3')->nullable();
+            $table->boolean('activated')->default('0');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('merchant_users');
+        Schema::dropIfExists('countries');
     }
 };

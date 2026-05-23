@@ -94,42 +94,44 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-100 min-h-screen flex items-center justify-center p-4 md:p-8">
+<body class="flex items-center justify-center min-h-screen p-4 bg-slate-50 text-slate-100 md:p-8">
 
-    <div class="w-full max-w-6xl overflow-hidden gap-x-4 text-slate-800 grid grid-cols-1 lg:grid-cols-12">
+    <div class="grid w-full max-w-6xl grid-cols-1 overflow-hidden gap-x-4 text-slate-800 lg:grid-cols-12">
 
         <!-- COLONNE GAUCHE (ILLUSTRATION, CONFIANCE & STATUTS SECURE) -->
         <div
-            class="lg:col-span-5 bg-slate-950 text-white p-8 md:p-10 flex border shadow-md mb-2 shadow-slate-200 rounded-3xl flex-col justify-between relative overflow-hidden">
+            class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
             <!-- Arrière-plan stylisé -->
-            <div
-                class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
+            <div class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
             </div>
-            <div class="absolute top-0 -left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl z-0"></div>
-            <div class="absolute bottom-0 -right-10 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl z-0"></div>
+            <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
+            <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
 
             <div class="relative z-10 dynamic-view-panel active">
                 <!-- Organisation Header -->
-                <div class="flex items-center gap-3 mb-8">
+                <img src="{{ asset('img/shek.png') }}" alt="icon" class="h-24 w-42">
+
+                <h2 class="mt-6 text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl font-outfit">
+                    Contribuez activement aux activité de la communauté Shekinah.
+                </h2>
+                <p class="mt-4 text-sm leading-relaxed text-slate-300">
+                    Soutenez activement en quelques clics : votre don humanitaire avec VPOS-Flexpaie en toute sécurité
+                </p>
+            </div>
+
+
+            <!-- Trust Badge Section at bottom -->
+            <div class="relative z-10 mt-10 filter dynamic-view-panel active">
+                <div class="flex items-center justify-center gap-3 mb-4">
                     <a href="https://www.flexpaie.com" target="_blank" class="inline-flex items-center gap-2">
                         <span
-                            class="h-10 px-5 gap-2 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                            class="flex items-center justify-center h-10 gap-2 px-5 text-blue-400 border rounded-xl bg-blue-600/20 border-blue-500/30">
                             <img src="{{ asset('img/card/icon-r.png') }}" alt="icon" class="w-6 h-6">
                             <img src="{{ asset('img/card/logo.png') }}" alt="Flexpaie Logo" class="w-24 h-auto -ml-1">
                         </span>
                     </a>
                 </div>
 
-                <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white font-outfit leading-tight mt-6">
-                    Contribuez activement aux activité de la communauté Shekinah.
-                </h2>
-                <p class="text-slate-300 text-sm mt-4 leading-relaxed">
-                    Soutenez activement en quelques clics : votre don humanitaire avec VPOS-Flexpaie en toute sécurité
-                </p>
-            </div>
-
-            <!-- Trust Badge Section at bottom -->
-            <div class="relative z-10 mt-10 filter dynamic-view-panel active">
                 <div class="h-px bg-slate-800/60"></div>
                 <p class="text-white text-center gap-1.5 my-3">
                     Méthodes de paiement disponible
@@ -137,34 +139,34 @@
 
                 <div class="flex items-center gap-4 text-xs text-slate-700">
                     <img src="{{ asset('img/p-ways.png') }}" alt="SSL Secure"
-                        class="w-full h-auto rounded-md border border-slate-700/50">
+                        class="w-full h-auto border rounded-md border-slate-700/50">
                 </div>
             </div>
         </div>
 
         <!-- COLONNE DROITE (LE FORMULAIRE TECHNIQUE INTERACTIF) -->
         <div
-            class="lg:col-span-7 p-6 md:p-10 flex flex-col justify-between bg-white mb-2 shadow-md shadow-slate-200 rounded-3xl relative border">
+            class="relative flex flex-col justify-between p-6 mb-2 bg-white border shadow-md lg:col-span-7 md:p-10 shadow-slate-200 rounded-3xl">
             <!-- Main Interactive Form -->
             <form id="donationForm" onsubmit="event.preventDefault(); simulateProcess();" class="space-y-6">
 
                 <!-- STEP 1: Vos Coordonnées -->
                 <div>
                     <h3
-                        class="text-sm font-bold uppercase tracking-wider text-slate-700 border-b border-slate-100 pb-2 mb-3 flex items-center gap-2">
+                        class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
                         <span
                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
                         <span>Coordonnées du Donateur</span>
                     </h3>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div class="dynamic-view-panel active">
                             <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-700">
-                                    <i class="fa-regular fa-user text-xs"></i>
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_name" required placeholder="Jean-Claude"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -176,8 +178,8 @@
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-700">
-                                    <i class="fa-regular fa-user text-xs"></i>
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_last_name" required placeholder="Kabongo"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -189,8 +191,8 @@
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-700">
-                                    <i class="fa-regular fa-envelope text-xs"></i>
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-regular fa-envelope"></i>
                                 </div>
                                 <input type="email" id="donor_email" required placeholder="jean.claude@gmail.com"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -213,17 +215,15 @@
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-700">
-                                    <i class="fa-solid fa-globe text-xs"></i>
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <select id="donor_country" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
-                                    <option value="">Sélectionner un pays</option>
-                                    <option value="CD">République Démocratique du Congo</option>
-                                    <option value="FR">France</option>
-                                    <option value="US">États-Unis</option>
-                                    <option value="BE">Belgique</option>
-                                    <option value="CA">Canada</option>
+                                    <option value="">Choisir un pays</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -232,8 +232,8 @@
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-700">
-                                    <i class="fa-solid fa-globe text-xs"></i>
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <input type="text" id="donor_city" required placeholder="Ville"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -244,8 +244,8 @@
 
                 <!-- STEP 2: Montant du don -->
                 <div>
-                    <div class="border-b border-slate-100 pb-2 mb-3 flex items-center ">
-                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                    <div class="flex items-center pb-2 mb-3 border-b border-slate-100 ">
+                        <h3 class="flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-slate-700">
                             <span
                                 class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">2</span>
                             <span>Définir le Montant</span>
@@ -256,29 +256,29 @@
                     <!-- BLOC DES BOUTONS PRÉRÉGLÉS (Masquable via JS) -->
                     <div id="preset_amounts_container" class="grid grid-cols-5 gap-2 mb-3.5 ">
                         <button type="button" onclick="setPresetValue(10, this)"
-                            class="preset-btn dynamic-view-panel active p-1 text-sm font-semibold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">10
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10
                             <span class="currency-label">$</span></button>
                         <button type="button" onclick="setPresetValue(25, this)"
-                            class="preset-btn dynamic-view-panel active p-1 text-sm font-semibold bg-blue-50 border-blue-500 text-blue-800 rounded-xl transition-all shadow-inner ring-1 ring-blue-500/20">25
+                            class="p-1 text-sm font-semibold text-blue-800 transition-all border-blue-500 shadow-inner preset-btn dynamic-view-panel active bg-blue-50 rounded-xl ring-1 ring-blue-500/20">25
                             <span class="currency-label">$</span></button>
                         <button type="button" onclick="setPresetValue(50, this)"
-                            class="preset-btn dynamic-view-panel active p-1 text-sm font-semibold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">50
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50
                             <span class="currency-label">$</span></button>
                         <button type="button" onclick="setPresetValue(100, this)"
-                            class="preset-btn dynamic-view-panel active p-1 text-sm font-semibold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">100
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">100
                             <span class="currency-label">$</span></button>
                         <button type="button" onclick="setPresetValue(250, this)"
-                            class="preset-btn dynamic-view-panel active p-1 text-sm font-semibold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">250
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">250
                             <span class="currency-label">$</span></button>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-4 items-center">
+                    <div class="grid items-center grid-cols-3 gap-4">
                         <div class="col-span-2 dynamic-view-panel active">
-                            <label id="amount_input_label" class="block text-xs font-semibold text-slate-500 mb-1">Ou
+                            <label id="amount_input_label" class="block mb-1 text-xs font-semibold text-slate-500">Ou
                                 saisir un montant sur-mesure (<span class="currency-label">USD</span>)</label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div id="input_currency_sign"
-                                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 font-bold text-sm">
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-bold pointer-events-none text-slate-500">
                                     $
                                 </div>
                                 <input type="number" id="custom_amount_input" min="1"
@@ -301,22 +301,22 @@
                 <!-- STEP 3: Moyen de Paiement -->
                 <div>
                     <h3
-                        class="text-sm font-bold uppercase tracking-wider text-slate-700 border-b border-slate-100 pb-2 mb-3 flex items-center gap-2">
+                        class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
                         <span
                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">3</span>
                         <span>Moyen de paiement de confiance</span>
                     </h3>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <!-- Mobile option -->
                         <label class="relative block cursor-pointer dynamic-view-panel active">
                             <input type="radio" name="payment_method" value="mobile" checked
-                                onclick="togglePaymentSection('mobile')" class="peer sr-only option-card-radio">
+                                onclick="togglePaymentSection('mobile')" class="sr-only peer option-card-radio">
                             <div
                                 class="option-card-label flex items-center justify-between p-3.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all peer-checked:border-blue-600 peer-checked:bg-blue-50/40">
                                 <div class="flex items-center gap-3">
                                     <div
-                                        class="w-9 h-9 bg-blue-100 text-blue-800 rounded-lg flex items-center justify-center">
+                                        class="flex items-center justify-center text-blue-800 bg-blue-100 rounded-lg w-9 h-9">
                                         <i class="fa-solid fa-mobile-screen-button"></i>
                                     </div>
                                     <div>
@@ -333,12 +333,12 @@
                         <!-- Card option -->
                         <label class="relative block cursor-pointer dynamic-view-panel active">
                             <input type="radio" name="payment_method" value="card"
-                                onclick="togglePaymentSection('card')" class="peer sr-only option-card-radio">
+                                onclick="togglePaymentSection('card')" class="sr-only peer option-card-radio">
                             <div
                                 class="option-card-label flex items-center justify-between p-3.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all peer-checked:border-blue-600 peer-checked:bg-blue-50/40">
                                 <div class="flex items-center gap-3">
                                     <div
-                                        class="w-9 h-9 bg-slate-100 text-slate-600 rounded-lg flex items-center justify-center">
+                                        class="flex items-center justify-center rounded-lg w-9 h-9 bg-slate-100 text-slate-600">
                                         <i class="fa-solid fa-credit-card"></i>
                                     </div>
                                     <div>
@@ -361,7 +361,7 @@
                             : <span class="text-red-500">*</span></label>
                         <div class="relative rounded-lg shadow-sm">
                             <div
-                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-900 font-bold text-xs border-r border-slate-200 pr-2">
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pr-2 text-xs font-bold border-r pointer-events-none text-slate-900 border-slate-200">
                                 +243
                             </div>
                             <input type="tel" id="mobile_phone" maxlength="9" required placeholder="812345678"
@@ -374,8 +374,8 @@
 
                 <!-- SECTION CONDITIONNELLE : CARTE BANCAIRE -->
                 <div id="section_card" class="dynamic-view-panel">
-                    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 md:p-5 space-y-4">
-                        <p class="block text-xs font-semibold text-slate-600 mb-1">
+                    <div class="p-4 space-y-4 border border-blue-100 bg-blue-50 rounded-2xl md:p-5">
+                        <p class="block mb-1 text-xs font-semibold text-slate-600">
                             Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre
                             carte bancaire (numéro, date d'expiration, CVV).
                         </p>
@@ -394,12 +394,12 @@
 
             <!-- SIMULATOR STATE OVERLAY -->
             <div id="simulator_modal"
-                class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm z-30 flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+                class="absolute inset-0 z-30 flex flex-col items-center justify-center hidden p-6 text-center bg-white/95 backdrop-blur-sm animate-fade-in">
 
                 <!-- BLOC D'ÉTAT GLOBAL DU PAIEMENT (affiché hors loading) -->
-                <div id="modal_status_view" class="hidden flex-col items-center">
+                <div id="modal_status_view" class="flex-col items-center hidden">
                     <div id="status_icon_container"
-                        class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-3 border shadow-inner">
+                        class="flex items-center justify-center w-16 h-16 mb-3 text-2xl border rounded-full shadow-inner">
                         <i id="status_icon" class=""></i>
                     </div>
                     <!-- Correction : h4 ciblé correctement et ID corrigé -->
@@ -407,17 +407,17 @@
                         avec succès !</h4>
 
                     <!-- Séparation : Le texte général ne doit pas englober le span de montant pour éviter d'être écrasé -->
-                    <p class="text-slate-500 text-xs max-w-sm mt-2 leading-relaxed" id="status_message_text"></p>
+                    <p class="max-w-sm mt-2 text-xs leading-relaxed text-slate-500" id="status_message_text"></p>
 
                     <div
                         class="bg-slate-50 border border-slate-100 p-4 rounded-xl mt-5 w-full max-w-sm text-left font-mono text-[11px] text-slate-500 space-y-1.5 shadow-sm">
                         <p class="flex justify-between"><span>RÉFÉRENCE :</span> <span
-                                class="text-slate-800 font-bold" id="modal_receipt_ref">TXN-764923</span></p>
+                                class="font-bold text-slate-800" id="modal_receipt_ref">TXN-764923</span></p>
                         <p class="flex justify-between"><span>DONATEUR :</span> <span class="text-slate-800"
                                 id="modal_receipt_donor">Jean-Claude</span></p>
                         <p class="flex justify-between"><span>CANAL :</span> <span class="text-slate-800"
                                 id="modal_receipt_channel">Mobile Money M-PESA</span></p>
-                        <p class="flex justify-between"><span>MONTANT :</span> <span class="text-blue-800 font-bold"
+                        <p class="flex justify-between"><span>MONTANT :</span> <span class="font-bold text-blue-800"
                                 id="modal_receipt_amount">0.00 $</span></p>
                         <p class="flex justify-between"><span>STATUT :</span> <span id="modal_receipt_status"
                                 class="font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>VALIDÉ</span></p>
@@ -429,22 +429,22 @@
                 </div>
 
                 <!-- TIMEOUT MODULE -->
-                <div id="modal_timeout_view" class="hidden flex-col items-center">
-                    <div class="text-amber-500 text-3xl font-bold mb-1">⏱</div>
-                    <div class="font-semibold text-red-500 text-base">Le délai de vérification a expiré</div>
+                <div id="modal_timeout_view" class="flex-col items-center hidden">
+                    <div class="mb-1 text-3xl font-bold text-amber-500">⏱</div>
+                    <div class="text-base font-semibold text-red-500">Le délai de vérification a expiré</div>
                     <!-- Correction : Ajout de la classe "timeout-message" attendue par le JS et retrait du code template string brut -->
-                    <p class="timeout-message text-xs text-slate-500 px-4 mt-2">
+                    <p class="px-4 mt-2 text-xs timeout-message text-slate-500">
                         Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous
                         parvenir.
                     </p>
-                    <div class="pt-4 flex flex-col gap-2 w-full max-w-xs mx-auto">
+                    <div class="flex flex-col w-full max-w-xs gap-2 pt-4 mx-auto">
                         <!-- Correction : Utilisation dynamique via variable globale dans le JS plutôt que l'injection brute dans le HTML -->
                         <button type="button" onclick="retryVerification()"
-                            class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">
+                            class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition-all bg-blue-600 border border-transparent shadow-sm rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             <i class="fa-solid fa-rotate-right mr-2 mt-0.5"></i> Réessayer la vérification
                         </button>
                         <button type="button" onclick="closeSimulatorModal()"
-                            class="w-full inline-flex justify-center rounded-xl border border-slate-200 shadow-sm px-4 py-2 bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 transition-all">
+                            class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium transition-all bg-white border shadow-sm rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50">
                             Fermer la fenêtre
                         </button>
                     </div>
@@ -452,9 +452,9 @@
 
                 <!-- LOADING/PROCESSING MODULE -->
                 <div id="modal_loading_view" class="flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full border-4 border-slate-200 border-t-blue-600 animate-spin mb-3">
+                    <div class="w-16 h-16 mb-3 border-4 rounded-full border-slate-200 border-t-blue-600 animate-spin">
                     </div>
-                    <h4 class="text-md font-bold text-slate-900 font-outfit">Saisie PIN Mobile Money requise...</h4>
+                    <h4 class="font-bold text-md text-slate-900 font-outfit">Saisie PIN Mobile Money requise...</h4>
                     <p class="text-slate-500 text-xs max-w-sm mt-1.5 leading-relaxed">
                         Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le
                         téléphone pour valider le transfert.
@@ -633,12 +633,12 @@
                         currency: chosenCurrency,
                         payment_method: activePaymentMethod,
                         phone: activePaymentMethod === 'mobile' ? phone : null,
-                        donor_name: donorName,
-                        donor_last_name: donorLastName,
-                        donor_email: donorEmail,
-                        donor_org: donorOrg,
-                        donor_country: donorCountry,
-                        donor_city: donorCity
+                        firstname: donorName,
+                        lastname: donorLastName,
+                        email: donorEmail,
+                        org: donorOrg,
+                        country: donorCountry,
+                        city: donorCity
                     })
                 })
                 .then(res => res.json())
@@ -686,7 +686,7 @@
 
             if (processingNotice) {
                 processingNotice.innerHTML =
-                    `<span class="inline-block animate-spin mr-2">⏳</span> Vérification du statut (${attempt}/${maxAttempts})...`;
+                    `<span class="inline-block mr-2 animate-spin">⏳</span> Vérification du statut (${attempt}/${maxAttempts})...`;
             }
 
             try {

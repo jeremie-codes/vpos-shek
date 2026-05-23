@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use App\Models\User;
 use App\Services\FlexpaieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -9,23 +11,46 @@ use Illuminate\Support\Facades\Log;
 class PaymentController extends Controller
 {
 
-    public function purchage(Request $request, FlexpaieService $flex)
+    public function purchase(Request $request, FlexpaieService $flex)
     {
         try {
             $method   = $request->input('payment_method'); // 1 = mobile, 2 = card
             $phone    = $request->input('phone');
             $amount    = $request->input('amount');
             $currency    = $request->input('currency');
+            $firstname    = $request->input('firstname');
+            $lastname    = $request->input('lastname');
+            $email    = $request->input('email');
+            $org    = $request->input('org');
+            $country    = $request->input('country');
+            $city    = $request->input('city');
 
             // Générer un code unique transaction
             $transactionCode = 'TRX-' . strtoupper(uniqid());
 
             /*
             |--------------------------------------------------------------------------
+            | RECHERCHE OU CRÉATION DE L'UTILISATEUR (Mutualisé)
+            |--------------------------------------------------------------------------
+            */
+            // On cherche l'utilisateur par son email (unique). S'il n'existe pas, on le crée.
+            $user = User::firstOrCreate(
+                ['email' => $email], // Condition de recherche
+                [                    // Données à insérer si l'utilisateur n'existe pas
+                    'firstname'  => $firstname,
+                    'lastname'   => $lastname,
+                    'org'        => $org,
+                    'country_id' => $country,
+                    'city'       => $city,
+                ]
+            );
+
+            /*
+            |--------------------------------------------------------------------------
             | MOBILE PAYMENT
             |--------------------------------------------------------------------------
             */
-            if ($method == "1") {
+            if ($method == "mobile") {
 
                 if (!$phone) {
                     return response()->json([
@@ -43,21 +68,21 @@ class PaymentController extends Controller
 
                 if (($result['code'] ?? null) == "0") {
 
-                    /*\App\Models\Transaction::create([
-                        'code' => $transactionCode,
-                        'amount' => $amount,
-                        'currency' => $currency,
-                        'phone' => $phone,
+                    $transaction = Transaction::create([
+                        'user_id'        => $user->id, // L'ID récupéré ou créé automatiquement
+                        'code'           => $transactionCode,
+                        'amount'         => $amount,
+                        'currency'       => $currency,
+                        'phone'          => $phone,
                         'payment_method' => 'mobile',
-                        'order_number' => $result['orderNumber'],
-                        'bundle_id' => $bundle->id,
-                        'status' => 'pending'
-                    ]);*/
+                        'order_number'   => $result['orderNumber'],
+                        'status'         => 'pending'
+                    ]);
 
                     return response()->json([
                         'status' => true,
                         'message' => 'Paiement envoyé sur votre téléphone',
-                        'orderNumber' => $result['orderNumber']
+                        'orderNumber' => $result['orderNumber'],
                     ]);
                 }
 
@@ -72,7 +97,7 @@ class PaymentController extends Controller
             | CARD PAYMENT
             |--------------------------------------------------------------------------
             */
-            if ($method == "2") {
+            if ($method == "card") {
 
                 $result = $flex->cardPayment(
                     $amount,
@@ -85,16 +110,16 @@ class PaymentController extends Controller
 
                 if (($result['code'] ?? null) == "0") {
 
-                    /*\App\Models\Transaction::create([
-                        'code' => $transactionCode,
-                        'amount' => $amount,
-                        'currency' => $currency,
-                        'phone' => null,
+                    Transaction::create([
+                        'user_id'        => $user->id, // L'ID récupéré ou créé automatiquement
+                        'code'           => $transactionCode,
+                        'amount'         => $amount,
+                        'currency'       => $currency,
+                        'phone'          => $phone,
                         'payment_method' => 'card',
-                        'order_number' => $result['orderNumber'],
-                        'bundle_id' => $bundle->id,
-                        'status' => 'pending'
-                    ]);*/
+                        'order_number'   => $result['orderNumber'],
+                        'status'         => 'pending'
+                    ]);
 
                     return response()->json([
                         'status' => true,
@@ -113,7 +138,6 @@ class PaymentController extends Controller
                 'status' => false,
                 'message' => 'Méthode invalide'
             ]);
-
         } catch (\Throwable $e) {
 
             Log::error('Erreur paiement: ' . $e->getMessage());
@@ -134,7 +158,8 @@ class PaymentController extends Controller
             // Aucune transaction
             if (($response['code'] ?? null) != "0" || empty($response['transaction'])) {
 
-                Log::error('Check payment pending: ' . json_encode($response));
+                Log::error('Check payment not found: ' . json_encode($response));
+
                 return response()->json([
                     'status' => 'not_found'
                 ]);
@@ -152,23 +177,14 @@ class PaymentController extends Controller
             if ($transaction['status'] === "0") {
 
                 // mettre à jour ta base
-                /*$localTransaction = Transaction::where('order_number', $orderNumber)->first();
+                $localTransaction = Transaction::where('order_number', $orderNumber)->first();
 
                 if ($localTransaction && $localTransaction->status !== 'success') {
 
                     $localTransaction->update([
                         'status' => 'success'
                     ]);
-
-                    // Créditer les SMS
-                    Subscription::create([
-                        'merchant_id' => $localTransaction->bundle->id,
-                        'bundle_id' => $localTransaction->bundle_id,
-                        'available_sms' => $localTransaction->bundle->number_sms,
-                    ]);
                 }
-
-                */
 
                 Log::error('Check payment success: ' . json_encode($response));
 
@@ -176,27 +192,17 @@ class PaymentController extends Controller
                     'status' => 'success',
                     'code' => $transaction['status']
                 ]);
-            }
-            else if ($transaction['status'] === "1" || $transaction['status'] === "4") {
+            } else if ($transaction['status'] === "1" || $transaction['status'] === "4") {
 
                 // mettre à jour ta base
-                /*$localTransaction = Transaction::where('order_number', $orderNumber)->first();
+                $localTransaction = Transaction::where('order_number', $orderNumber)->first();
 
                 if ($localTransaction && $localTransaction->status !== 'success') {
 
                     $localTransaction->update([
-                        'status' => 'success'
-                    ]);
-
-                    // Créditer les SMS
-                    Subscription::create([
-                        'merchant_id' => $localTransaction->bundle->id,
-                        'bundle_id' => $localTransaction->bundle_id,
-                        'available_sms' => $localTransaction->bundle->number_sms,
+                        'status' => 'failed'
                     ]);
                 }
-
-                */
 
                 Log::error('Check payment success: ' . json_encode($response));
 
@@ -213,7 +219,6 @@ class PaymentController extends Controller
                 'status' => 'pending',
                 'code' => $transaction['status']
             ]);
-
         } catch (\Throwable $e) {
 
             Log::error('Check payment error: ' . $e->getMessage());
@@ -236,7 +241,7 @@ class PaymentController extends Controller
             // Exemple: récupérer order_number envoyé par FlexPay dans
             $content = json_decode($request->getContent(), true);
 
-            /*$transaction = Transaction::where('order_number', $code)->first();
+            $transaction = Transaction::where('order_number', $code)->first();
 
             if ($transaction) {
 
@@ -244,18 +249,11 @@ class PaymentController extends Controller
                 if (isset($content['status']) && $content['status'] === "0") {
                     $transaction->status = 'success';
                     $transaction->save();
-
-                    // Créditer les SMS
-                    Subscription::create([
-                        'merchant_id' => $transaction->bundle->id,
-                        'bundle_id' => $transaction->bundle_id,
-                        'available_sms' => $transaction->bundle->number_sms,
-                    ]);
                 } else {
                     $transaction->status = 'failed';
                     $transaction->save();
                 }
-            }*/
+            }
 
             Log::error('Callback received: ' . $code . ' - ' . json_encode($request->all()));
         } catch (\Throwable $e) {
@@ -274,5 +272,4 @@ class PaymentController extends Controller
         return redirect()
             ->route('dashboard')->with('error', 'La transaction a échoué.');
     }
-
 }

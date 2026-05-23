@@ -23,7 +23,7 @@ class FlexpaieService
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
             'Content-Type' => 'application/json',
         ])->post(self::BASE_URL_PHONE, [
-            'merchant' => 'CIRRUS',
+            'merchant' => 'SHEKINAH_TABERNACLE',
             'type' => "1",
             'reference' => $this->generateRandomCode(6),
             'phone' => $phone,
@@ -41,7 +41,7 @@ class FlexpaieService
             'Content-Type' => 'application/json',
         ])->post(self::BASE_URL_CARD, [
             'authorization' => 'Bearer ' . config('services.flexpay.key'),
-            'merchant' => 'CIRRUS',
+            'merchant' => 'SHEKINAH_TABERNACLE',
             'reference' => $this->generateRandomCode(6),
             'amount' => $amount,
             'currency' => $currency,
