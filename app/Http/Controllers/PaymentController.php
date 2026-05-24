@@ -14,36 +14,70 @@ class PaymentController extends Controller
     public function purchase(Request $request, FlexpaieService $flex)
     {
         try {
-            $method   = $request->input('payment_method'); // 1 = mobile, 2 = card
-            $phone    = $request->input('phone');
-            $amount    = $request->input('amount');
-            $currency    = $request->input('currency');
+            $method       = $request->input('payment_method'); // mobile ou card
+            $phone        = $request->input('phone');
+            $amount       = $request->input('amount');
+            $currency     = $request->input('currency');
             $firstname    = $request->input('firstname');
-            $lastname    = $request->input('lastname');
-            $email    = $request->input('email');
-            $org    = $request->input('org');
-            $country    = $request->input('country');
-            $city    = $request->input('city');
+            $lastname     = $request->input('lastname');
+            $email        = $request->input('email');
+            $org          = $request->input('org');
+            $country      = $request->input('country');
+            $city         = $request->input('city');
+
+            // On récupère le statut anonyme envoyé par le front-end
+            $isAnonymous  = $request->input('is_anonymous', false);
 
             // Générer un code unique transaction
             $transactionCode = 'TRX-' . strtoupper(uniqid());
 
             /*
             |--------------------------------------------------------------------------
-            | RECHERCHE OU CRÉATION DE L'UTILISATEUR (Mutualisé)
+            | RECHERCHE OU CRÉATION DE L'UTILISATEUR (Adapté aux cas Anonymes)
             |--------------------------------------------------------------------------
             */
-            // On cherche l'utilisateur par son email (unique). S'il n'existe pas, on le crée.
-            $user = User::firstOrCreate(
-                ['email' => $email], // Condition de recherche
-                [                    // Données à insérer si l'utilisateur n'existe pas
-                    'firstname'  => $firstname,
-                    'lastname'   => $lastname,
-                    'org'        => $org,
-                    'country_id' => $country,
-                    'city'       => $city,
-                ]
-            );
+            if ($isAnonymous) {
+                if ($method == "mobile") {
+                    // Cas Mobile Money Anonyme : Recherche/Création par numéro de téléphone unique
+                    // On utilise un faux email basé sur le numéro pour satisfaire la contrainte d'unicité
+                    $user = User::firstOrCreate(
+                        ['email' => 'anonymous_' . $phone . '@system.local'],
+                        [
+                            'firstname'  => 'Anonyme',
+                            'lastname'   => null,
+                            'org'        => null,
+							'phone'        => $phone,
+                            'country_id' => null,
+                            'city'       => null,
+                        ]
+                    );
+                } else {
+                    // Cas Carte Bancaire Anonyme : Un seul et unique compte système global pour TOUTES les cartes anonymes
+                    $user = User::firstOrCreate(
+                        ['email' => 'global_anonymous_card@system.local'],
+                        [
+                            'firstname'  => 'Anonyme',
+                            'lastname'   => null,
+                            'org'        => null,
+                            'country_id' => null,
+                            'city'       => null,
+                        ]
+                    );
+                }
+            } else {
+                // Logique classique si le don N'EST PAS anonyme
+                $user = User::firstOrCreate(
+                    ['email' => $email],
+                    [
+                        'firstname'  => $firstname,
+                        'lastname'   => $lastname,
+                        'org'        => $org,
+                        'country_id' => $country,
+						'phone' => $phone ?? null,
+                        'city'       => $city,
+                    ]
+                );
+            }
 
             /*
             |--------------------------------------------------------------------------
@@ -68,15 +102,15 @@ class PaymentController extends Controller
 
                 if (($result['code'] ?? null) == "0") {
 
-                    $transaction = Transaction::create([
-                        'user_id'        => $user->id, // L'ID récupéré ou créé automatiquement
+                    Transaction::create([
+                        'user_id'        => $user->id,
                         'code'           => $transactionCode,
                         'amount'         => $amount,
                         'currency'       => $currency,
                         'phone'          => $phone,
                         'payment_method' => 'mobile',
                         'order_number'   => $result['orderNumber'],
-                        'status'         => 'pending'
+                        'status'         => 'pending',
                     ]);
 
                     return response()->json([
@@ -103,7 +137,7 @@ class PaymentController extends Controller
                     $amount,
                     $currency,
                     route('payment.callback', ['code' => $transactionCode]),
-                    route('payment.success'),
+                    route('payment.success', ['code' => $transactionCode]),
                     route('payment.cancel', ['code' => $transactionCode]),
                     route('payment.decline', ['code' => $transactionCode]),
                 );
@@ -111,14 +145,14 @@ class PaymentController extends Controller
                 if (($result['code'] ?? null) == "0") {
 
                     Transaction::create([
-                        'user_id'        => $user->id, // L'ID récupéré ou créé automatiquement
+                        'user_id'        => $user->id,
                         'code'           => $transactionCode,
                         'amount'         => $amount,
                         'currency'       => $currency,
-                        'phone'          => $phone,
+                        'phone'          => null, // Pas de numéro enregistré pour le paiement par carte anonyme
                         'payment_method' => 'card',
                         'order_number'   => $result['orderNumber'],
-                        'status'         => 'pending'
+                        'status'         => 'pending',
                     ]);
 
                     return response()->json([
@@ -229,12 +263,6 @@ class PaymentController extends Controller
         }
     }
 
-    public function success()
-    {
-        return redirect()
-            ->route('dashboard')->with('success', 'La transaction est effectuée.');
-    }
-
     public function callback(Request $request, $userId, $code)
     {
         try {
@@ -261,15 +289,42 @@ class PaymentController extends Controller
         }
     }
 
-    public function cancel()
+    public function success($code)
     {
-        return redirect()
-            ->route('dashboard')->with('error', 'La transaction a été annulée.');
+        $transaction = Transaction::where('code', $code)->first();
+
+        if($transaction && $transaction->status == 'pending') {
+            $transaction->update(['status' => 'success']);
+            return view('success');
+        }
+
+        return view('finished');
+
     }
 
-    public function decline()
+    public function cancel($code)
     {
-        return redirect()
-            ->route('dashboard')->with('error', 'La transaction a échoué.');
+        $transaction = Transaction::where('code', $code)->first();
+
+        if($transaction && $transaction->status == 'pending') {
+            $transaction->update(['status' => 'failed']);
+            return view('cancel');
+        }
+
+        return view('finished');
+
+    }
+
+    public function decline($code)
+    {
+        $transaction = Transaction::where('code', $code)->first();
+
+        if($transaction && $transaction->status == 'pending') {
+            $transaction->update(['status' => 'failed']);
+            return view('decline');
+        }
+
+        return view('finished');
+
     }
 }

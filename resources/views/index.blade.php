@@ -102,23 +102,26 @@
         <div
             class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
             <!-- Arrière-plan stylisé -->
-            <div class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
+            <div
+                class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
             </div>
             <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
             <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
 
             <div class="relative z-10 dynamic-view-panel active">
                 <!-- Organisation Header -->
-                <img src="{{ asset('img/shek.png') }}" alt="icon" class="h-24 w-42">
+                 <div class="flex items-center justify-center md:items-start md:justify-start gap-3 mb-4">
+                    <img src="{{ asset('img/shek.png') }}" alt="icon" class="h-24 w-42">
+                </div>
 
-                <h2 class="mt-6 text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl font-outfit">
-                    Contribuez activement aux activité de la communauté Shekinah.
+                <h2 class="text-center md:text-left mt-6 text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl font-outfit">
+                    Dons pour la reconstruction
+                    {{-- Contribuez activement aux activités de la communauté Shekinah. --}}
                 </h2>
-                <p class="mt-4 text-sm leading-relaxed text-slate-300">
-                    Soutenez activement en quelques clics : votre don humanitaire avec VPOS-Flexpaie en toute sécurité
+                <p class="text-center md:text-left mt-4 text-sm leading-relaxed text-slate-300">
+                    Soutenez activement les activités en quelques clics avec VPOS-Flexpaie en toute sécurité.
                 </p>
             </div>
-
 
             <!-- Trust Badge Section at bottom -->
             <div class="relative z-10 mt-10 filter dynamic-view-panel active">
@@ -151,21 +154,31 @@
             <form id="donationForm" onsubmit="event.preventDefault(); simulateProcess();" class="space-y-6">
 
                 <!-- STEP 1: Vos Coordonnées -->
-                <div>
-                    <h3
-                        class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
-                        <span
-                            class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
+                <div class="transition-all duration-300">
+                    <h3 class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
+                        <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
                         <span>Coordonnées du Donateur</span>
                     </h3>
 
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <!-- CASE À COCHER : FAIRE UN DON ANONYME -->
+                    <div class="mb-4 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-3 hover:bg-slate-100/70 transition-all">
+                        <div class="flex items-center h-5">
+                            <!-- Ajout du onclick pour l'action de masquage complet -->
+                            <input id="anonymous_donation" type="checkbox" onchange="toggleAnonymousDonation(this.checked)"
+                                class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500/30 focus:ring-2 transition-all cursor-pointer">
+                        </div>
+                       <div class="text-xs">
+                            <label for="anonymous_donation" class="font-bold text-slate-700 cursor-pointer select-none">Contribuer de manière anonyme?</label>
+                                <p class="text-slate-500 font-normal mt-0.5">Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.</p>
+                        </div>
+                    </div>
+
+                    <!-- CONTENEUR DES CHAMPS PERSONNELS (Masqué complètement si anonyme) -->
+                    <div id="personal_fields_container" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_name" required placeholder="Jean-Claude"
@@ -174,11 +187,9 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nom : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nom : <span class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_last_name" required placeholder="Kabongo"
@@ -187,20 +198,18 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Adresse e-mail : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Adresse e-mail (optionnel) : </label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-envelope"></i>
                                 </div>
-                                <input type="email" id="donor_email" required placeholder="jean.claude@gmail.com"
+                                <input type="email" id="donor_email" placeholder="jean.claude@gmail.com"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
+
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Organisation : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Organisation : <span class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <select id="donor_org" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -210,12 +219,11 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Pays : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Pays : <span class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <select id="donor_country" required
@@ -227,12 +235,11 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ville : <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ville : <span class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <input type="text" id="donor_city" required placeholder="Ville"
@@ -250,10 +257,8 @@
                                 class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">2</span>
                             <span>Définir le Montant</span>
                         </h3>
-                        <!-- SÉLECTEUR DE DEVISE UNIQUE -->
                     </div>
 
-                    <!-- BLOC DES BOUTONS PRÉRÉGLÉS (Masquable via JS) -->
                     <div id="preset_amounts_container" class="grid grid-cols-5 gap-2 mb-3.5 ">
                         <button type="button" onclick="setPresetValue(10, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10
@@ -279,8 +284,7 @@
                             <div class="relative rounded-lg shadow-sm">
                                 <div id="input_currency_sign"
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-bold pointer-events-none text-slate-500">
-                                    $
-                                </div>
+                                    $</div>
                                 <input type="number" id="custom_amount_input" min="1"
                                     placeholder="Saisir le montant..." oninput="updateCustomAmountValue(this.value)"
                                     class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
@@ -308,7 +312,6 @@
                     </h3>
 
                     <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        <!-- Mobile option -->
                         <label class="relative block cursor-pointer dynamic-view-panel active">
                             <input type="radio" name="payment_method" value="mobile" checked
                                 onclick="togglePaymentSection('mobile')" class="sr-only peer option-card-radio">
@@ -330,7 +333,6 @@
                             </div>
                         </label>
 
-                        <!-- Card option -->
                         <label class="relative block cursor-pointer dynamic-view-panel active">
                             <input type="radio" name="payment_method" value="card"
                                 onclick="togglePaymentSection('card')" class="sr-only peer option-card-radio">
@@ -356,14 +358,13 @@
 
                 <!-- SECTION CONDITIONNELLE : MOBILE MONEY -->
                 <div id="section_mobile" class="dynamic-view-panel active">
-                    <div class="mt-0">
-                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Numéro de téléphone mobile
-                            : <span class="text-red-500">*</span></label>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Numéro de téléphone mobile :
+                            <span class="text-red-500">*</span></label>
                         <div class="relative rounded-lg shadow-sm">
                             <div
                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pr-2 text-xs font-bold border-r pointer-events-none text-slate-900 border-slate-200">
-                                +243
-                            </div>
+                                +243</div>
                             <input type="tel" id="mobile_phone" maxlength="9" required placeholder="812345678"
                                 class="block w-full pl-16 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm font-mono text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                         </div>
@@ -391,7 +392,6 @@
                     </button>
                 </div>
             </form>
-
             <!-- SIMULATOR STATE OVERLAY -->
             <div id="simulator_modal"
                 class="absolute inset-0 z-30 flex flex-col items-center justify-center hidden p-6 text-center bg-white/95 backdrop-blur-sm animate-fade-in">
@@ -481,6 +481,43 @@
             'USD': '$',
             'CDF': 'FC',
         };
+
+        function toggleAnonymousDonation(isAnonymous) {
+            const container = document.getElementById('personal_fields_container');
+            const fieldsToToggle = [
+                'donor_name',
+                'donor_last_name',
+                'donor_email',
+                'donor_org',
+                'donor_country',
+                'donor_city'
+            ];
+
+            if (isAnonymous) {
+                // 1. Cache complètement le conteneur et libère l'espace
+                container.classList.add('hidden');
+
+                // 2. Supprime l'attribut 'required' et vide les champs
+                fieldsToToggle.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.removeAttribute('required');
+                        el.value = ''; // Optionnel : nettoie le champ pour le back-end
+                    }
+                });
+            } else {
+                // 1. Réaffiche le conteneur
+                container.classList.remove('hidden');
+
+                // 2. Remet l'obligation de remplissage (sauf pour l'email qui est optionnel)
+                fieldsToToggle.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && id !== 'donor_email') {
+                        el.setAttribute('required', 'required');
+                    }
+                });
+            }
+        }
 
         // Fonction pour mettre à jour la devise globalement et gérer l'affichage des boutons
         function updateCurrency(currency) {
@@ -592,12 +629,16 @@
                 return;
             }
 
-            const donorName = document.getElementById('donor_name').value;
-            const donorLastName = document.getElementById('donor_last_name').value;
-            const donorEmail = document.getElementById('donor_email').value;
-            const donorOrg = document.getElementById('donor_org').value;
-            const donorCountry = document.getElementById('donor_country').value;
-            const donorCity = document.getElementById('donor_city').value;
+            // 1. Récupérer si le don est anonyme
+            const isAnonymous = document.getElementById('anonymous_donation')?.checked || false;
+
+            // 2. Récupération des valeurs (qui seront vides si anonyme)
+            const donorName = isAnonymous ? null : document.getElementById('donor_name').value;
+            const donorLastName = isAnonymous ? null : document.getElementById('donor_last_name').value;
+            const donorEmail = isAnonymous ? null : document.getElementById('donor_email').value;
+            const donorOrg = isAnonymous ? null : document.getElementById('donor_org').value;
+            const donorCountry = isAnonymous ? null : document.getElementById('donor_country').value;
+            const donorCity = isAnonymous ? null : document.getElementById('donor_city').value;
             const phone = document.getElementById('mobile_phone').value;
 
             if (activePaymentMethod === 'mobile' && phone.length !== 9) {
@@ -610,7 +651,6 @@
             const modalStatus = document.getElementById('modal_status_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
 
-            // Gestion propre de l'affichage initial de la modale
             modal.classList.remove('hidden');
             modalLoading.classList.add('flex');
             modalLoading.classList.remove('hidden');
@@ -633,6 +673,7 @@
                         currency: chosenCurrency,
                         payment_method: activePaymentMethod,
                         phone: activePaymentMethod === 'mobile' ? phone : null,
+                        is_anonymous: isAnonymous, // <-- On envoie l'information clé au Back-end
                         firstname: donorName,
                         lastname: donorLastName,
                         email: donorEmail,

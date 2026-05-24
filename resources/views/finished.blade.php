@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Échec du paiement - Vpos</title>
+    <title>Paiement clôturé - Vpos</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome pour les icônes -->
@@ -21,19 +21,19 @@
 
     <div class="bg-white rounded-2xl border shadow-xl p-8 max-w-md w-full text-center relative overflow-hidden">
 
-        <!-- Indicateur visuel d'échec -->
-        <div class="w-16 h-16 rounded-full bg-red-100 border border-red-200 text-red-600 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
-            <i class="fa-solid fa-circle-xmark"></i>
+        <!-- Indicateur visuel de succès -->
+        <div class="w-16 h-16 rounded-full bg-slate-100 border border-slate-200 text-slate-500 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+            <i class="fa-solid fa-circle-check"></i>
         </div>
 
         <!-- Titre principal -->
         <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
-            Paiement échoué
+            Paiement déjà clôturé
         </h1>
 
         <!-- Message d'explication textuel -->
         <p class="text-slate-500 text-sm mt-3 leading-relaxed px-2">
-            Nous n'avons pas pu finaliser votre transaction par carte de crédit/débit. La commande a été interrompue ou rejetée par votre établissement bancaire.
+            Votre paiement a déjà été clôturé. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre support pour une assistance rapide.
         </p>
 
         <!-- Boutons d'actions -->

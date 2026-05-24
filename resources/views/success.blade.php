@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Échec du paiement - Fonds de Solidarité</title>
+    <title>Paiement réussi - Vpos</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome pour les icônes -->
@@ -26,7 +26,7 @@
     <div
         class="bg-white rounded-2xl border shadow-xl p-8 max-w-md w-full text-center relative overflow-hidden">
 
-        <!-- Indicateur visuel d'échec -->
+        <!-- Indicateur visuel de succès -->
         <div
             class="w-16 h-16 rounded-full bg-green-100 border border-green-200 text-green-600 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
             <i class="fa-solid fa-circle-check"></i>
@@ -53,7 +53,7 @@
             </a>
 
             <!-- Lien secondaire pour contacter le support au besoin -->
-            <a href="mailto:support@fonds-solidarite.org"
+            <a href="mailto:info@flexpaie.com"
                 class="w-full inline-flex justify-center items-center rounded-xl px-4 py-3 bg-white border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 transition-colors">
                 <i class="fa-solid fa-headset mr-2"></i> Contacter l'assistance
             </a>
@@ -61,7 +61,7 @@
 
         <!-- Note de pied de page discrète -->
         <div class="mt-6 text-[10px] text-slate-400">
-            Fonds de Solidarité — Plateforme Sécurisée VPOS
+            &copy; 2023 Plateforme Sécurisée VPOS
         </div>
     </div>
 

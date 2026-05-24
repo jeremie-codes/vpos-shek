@@ -40,7 +40,7 @@ class FlexpaieService
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post(self::BASE_URL_CARD, [
-            'authorization' => 'Bearer ' . config('services.flexpay.key'),
+            'authorization' => 'Bearer ' . config('services.flexpay.token'),
             'merchant' => 'SHEKINAH_TABERNACLE',
             'reference' => $this->generateRandomCode(6),
             'amount' => $amount,
@@ -58,7 +58,7 @@ class FlexpaieService
     public function getPaymentStatus(string $ordernumber): array
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . config('services.flexpay.key'),
+            'Authorization' => 'Bearer ' . config('services.flexpay.token'),
         ])->get(self::BASE_URL_CHECK . $ordernumber);
 
         return $response->json();

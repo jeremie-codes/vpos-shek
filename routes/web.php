@@ -13,6 +13,6 @@ Route::post('/vpos/pay', [PaymentController::class, 'purchase'])->name('vpos.pur
 Route::get('/vpos/check-payment/{orderNumber}', [PaymentController::class, 'check'])->name('vpos.check');
 
 Route::get('/vpos/callback/{code}', [PaymentController::class, 'callback'])->name('payment.callback');
-Route::get('/payment/success', function () { return view('success'); })->name('success');
-Route::get('/payment/cancel',  function () { return view('cancel'); })->name('payment.cancel');
-Route::get('/payment/declined',  function () { return view('decline'); })->name('payment.decline');
+Route::get('/payment/success/{code}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel/{code}',  [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::get('/payment/declined/{code}',  [PaymentController::class, 'decline'])->name('payment.decline');
