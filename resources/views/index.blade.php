@@ -98,51 +98,94 @@
 
     <div class="grid w-full max-w-6xl grid-cols-1 overflow-hidden gap-x-4 text-slate-800 lg:grid-cols-12">
 
+        <!-- Bouton Partager -->
+        <button onclick="showShareModal()" type="button"
+            class="fixed z-40 flex items-center gap-2 px-4 py-2 font-bold text-white bg-blue-600 shadow-lg top-6 right-6 hover:bg-blue-700 rounded-xl">
+            <i class="fa-solid fa-share-nodes"></i> Partager
+        </button>
+
+        <!-- Modal de partage avec QR code -->
+        <div id="share_modal"
+            class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/40 backdrop-blur-sm">
+            <div class="relative flex flex-col items-center w-full max-w-xs p-8 bg-white shadow-xl rounded-2xl">
+                <button onclick="closeShareModal()"
+                    class="absolute text-xl top-3 right-3 text-slate-400 hover:text-slate-700"><i
+                        class="fa-solid fa-xmark"></i></button>
+                <h3 class="mb-4 text-lg font-bold text-slate-800">Partager cette page</h3>
+                <div class="flex justify-center p-2 mb-4 border bg-slate-50 rounded-xl border-slate-100">
+                    <img id="qrcode_image" src="" alt="QR Code de partage" class="w-[200px] h-[200px] hidden" />
+                    <div id="qrcode_placeholder"
+                        class="w-[200px] h-[200px] flex items-center justify-center text-slate-400 text-xs">
+                        Génération du QR Code...
+                    </div>
+                </div>
+
+                <div class="flex flex-col w-full gap-2 mb-2">
+                    <input id="share_link_input" type="text" readonly class="w-full text-xs border rounded-lg opacity-0 cursor-auto text-slate-700 bg-slate-50" />
+
+                    <button onclick="shareEventFromCard(event)" class="flex items-center justify-center w-full gap-2 py-2 font-semibold text-blue-700 bg-blue-100 rounded-lg hover:bg-blue-200">
+                        <i class="fa fa-share"></i>
+                        Partager ailleurs
+                    </button>
+                    <button id="copy_share_btn" type="button" onclick="copyShareLink()" class="flex items-center justify-center w-full gap-2 py-2 font-semibold rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200">
+                        <i class="fa-regular fa-copy"></i> Copier le lien
+                    </button>
+                </div>
+                <button onclick="downloadQrCode()"
+                    class="flex items-center justify-center w-full gap-2 py-2 font-semibold text-green-700 bg-green-100 rounded-lg hover:bg-green-200"><i
+                        class="fa-solid fa-download"></i> Télécharger le QR Code</button>
+            </div>
+        </div>
+
         <!-- COLONNE GAUCHE (ILLUSTRATION, CONFIANCE & STATUTS SECURE) -->
-        <div
-            class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
-            <!-- Arrière-plan stylisé -->
+        <div class="relative flex flex-col lg:col-span-5">
             <div
-                class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
-            </div>
-            <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
-            <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
+                class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
+                <!-- Arrière-plan stylisé -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
+                </div>
+                <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
+                <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
 
-            <div class="relative z-10 dynamic-view-panel active">
-                <!-- Organisation Header -->
-                 <div class="flex items-center justify-center md:items-start md:justify-start gap-3 mb-4">
-                    <img src="{{ asset('img/shek.png') }}" alt="icon" class="h-24 w-42">
+                <div class="relative z-10 dynamic-view-panel active">
+                    <!-- Organisation Header -->
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <img src="{{ asset('img/shek.png') }}" alt="icon" class="h-24 w-42">
+                    </div>
+
+                    <h4
+                        class="mt-6 text-xl font-semibold leading-tight tracking-tight text-center text-white md:text-xl font-outfit">
+                        Dons pour la reconstruction
+                        {{-- Contribuez activement aux activités de la communauté Shekinah. --}}
+                    </h4>
+                    <p class="text-sm leading-relaxed text-center text-slate-300">
+                        Soutenir activement les activités de l'église.
+                    </p>
                 </div>
 
-                <h2 class="text-center md:text-left mt-6 text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl font-outfit">
-                    Dons pour la reconstruction
-                    {{-- Contribuez activement aux activités de la communauté Shekinah. --}}
-                </h2>
-                <p class="text-center md:text-left mt-4 text-sm leading-relaxed text-slate-300">
-                    Soutenez activement les activités en quelques clics avec VPOS-Flexpaie en toute sécurité.
-                </p>
-            </div>
+                <!-- Trust Badge Section at bottom -->
+                <div class="relative z-10 mt-10 filter dynamic-view-panel active">
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <a href="https://www.flexpaie.com" target="_blank" class="inline-flex items-center gap-2">
+                            <span
+                                class="flex items-center justify-center h-10 gap-2 px-5 text-blue-400 border rounded-xl bg-blue-600/20 border-blue-500/30">
+                                <img src="{{ asset('img/card/icon-r.png') }}" alt="icon" class="w-6 h-6">
+                                <img src="{{ asset('img/card/logo.png') }}" alt="Flexpaie Logo"
+                                    class="w-24 h-auto -ml-1">
+                            </span>
+                        </a>
+                    </div>
 
-            <!-- Trust Badge Section at bottom -->
-            <div class="relative z-10 mt-10 filter dynamic-view-panel active">
-                <div class="flex items-center justify-center gap-3 mb-4">
-                    <a href="https://www.flexpaie.com" target="_blank" class="inline-flex items-center gap-2">
-                        <span
-                            class="flex items-center justify-center h-10 gap-2 px-5 text-blue-400 border rounded-xl bg-blue-600/20 border-blue-500/30">
-                            <img src="{{ asset('img/card/icon-r.png') }}" alt="icon" class="w-6 h-6">
-                            <img src="{{ asset('img/card/logo.png') }}" alt="Flexpaie Logo" class="w-24 h-auto -ml-1">
-                        </span>
-                    </a>
-                </div>
+                    <div class="h-px bg-slate-800/60"></div>
+                    <p class="text-white text-center gap-1.5 my-3">
+                        Méthodes de paiement disponible
+                    </p>
 
-                <div class="h-px bg-slate-800/60"></div>
-                <p class="text-white text-center gap-1.5 my-3">
-                    Méthodes de paiement disponible
-                </p>
-
-                <div class="flex items-center gap-4 text-xs text-slate-700">
-                    <img src="{{ asset('img/p-ways.png') }}" alt="SSL Secure"
-                        class="w-full h-auto border rounded-md border-slate-700/50">
+                    <div class="flex items-center gap-4 text-xs text-slate-700">
+                        <img src="{{ asset('img/p-way.png') }}" alt="SSL Secure"
+                            class="w-full h-auto border rounded-md border-slate-700/50">
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,30 +198,39 @@
 
                 <!-- STEP 1: Vos Coordonnées -->
                 <div class="transition-all duration-300">
-                    <h3 class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
-                        <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
+                    <h3
+                        class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
+                        <span
+                            class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
                         <span>Coordonnées du Donateur</span>
                     </h3>
 
                     <!-- CASE À COCHER : FAIRE UN DON ANONYME -->
-                    <div class="mb-4 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-3 hover:bg-slate-100/70 transition-all">
+                    <div
+                        class="flex items-start gap-3 p-3 mb-4 transition-all border bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100/70">
                         <div class="flex items-center h-5">
                             <!-- Ajout du onclick pour l'action de masquage complet -->
-                            <input id="anonymous_donation" type="checkbox" onchange="toggleAnonymousDonation(this.checked)"
-                                class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500/30 focus:ring-2 transition-all cursor-pointer">
+                            <input id="anonymous_donation" type="checkbox"
+                                onchange="toggleAnonymousDonation(this.checked)"
+                                class="w-4 h-4 text-blue-600 transition-all rounded cursor-pointer border-slate-300 focus:ring-blue-500/30 focus:ring-2">
                         </div>
-                       <div class="text-xs">
-                            <label for="anonymous_donation" class="font-bold text-slate-700 cursor-pointer select-none">Contribuer de manière anonyme?</label>
-                                <p class="text-slate-500 font-normal mt-0.5">Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.</p>
+                        <div class="text-xs">
+                            <label for="anonymous_donation"
+                                class="font-bold cursor-pointer select-none text-slate-700">Contribuer de manière
+                                anonyme?</label>
+                            <p class="text-slate-500 font-normal mt-0.5">Cochez cette case si vous ne souhaitez pas
+                                renseigner vos informations personnelles.</p>
                         </div>
                     </div>
 
                     <!-- CONTENEUR DES CHAMPS PERSONNELS (Masqué complètement si anonyme) -->
                     <div id="personal_fields_container" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span
+                                    class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_name" required placeholder="Jean-Claude"
@@ -187,9 +239,11 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nom : <span class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nom : <span
+                                    class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
                                 <input type="text" id="donor_last_name" required placeholder="Kabongo"
@@ -198,9 +252,11 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Adresse e-mail (optionnel) : </label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Adresse e-mail (optionnel)
+                                : </label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-envelope"></i>
                                 </div>
                                 <input type="email" id="donor_email" placeholder="jean.claude@gmail.com"
@@ -209,7 +265,8 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Organisation : <span class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Organisation : <span
+                                    class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <select id="donor_org" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
@@ -221,9 +278,11 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Pays : <span class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Pays : <span
+                                    class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <select id="donor_country" required
@@ -237,9 +296,11 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ville : <span class="text-red-500">*</span></label>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ville : <span
+                                    class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <input type="text" id="donor_city" required placeholder="Ville"
@@ -392,6 +453,7 @@
                     </button>
                 </div>
             </form>
+
             <!-- SIMULATOR STATE OVERLAY -->
             <div id="simulator_modal"
                 class="absolute inset-0 z-30 flex flex-col items-center justify-center hidden p-6 text-center bg-white/95 backdrop-blur-sm animate-fade-in">
@@ -470,6 +532,203 @@
     </div>
 
     <!-- SCRIPT DE COMPORTEMENT EXÉCUTABLE DE LA PAGE -->
+    <script>
+        // Fonction magique pour charger le script uniquement quand on en a besoin
+        window.showShareModal = function() {
+            const modal = document.getElementById('share_modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+
+            const url = window.location.href;
+            document.getElementById('share_link_input').value = url;
+
+            // Éléments HTML
+            const qrImg = document.getElementById('qrcode_image');
+            const qrPlaceholder = document.getElementById('qrcode_placeholder');
+
+            // On affiche le placeholder de chargement
+            qrImg.classList.add('hidden');
+            qrPlaceholder.classList.remove('hidden');
+
+            // Utilisation de l'API Google Charts (Génère un QR Code parfait via une simple URL)
+            // cht=qr (type QR Code), chs=200x200 (taille), chl=url (le lien à encoder)
+            const googleQrCodeUrl =
+                `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+
+            // On applique l'URL à l'image
+            qrImg.src = googleQrCodeUrl;
+
+            // Dès que l'image est chargée par le navigateur, on l'affiche
+            qrImg.onload = function() {
+                qrPlaceholder.classList.add('hidden');
+                qrImg.classList.remove('hidden');
+            };
+
+            const copyBtn = document.getElementById('copy_share_btn');
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier le lien';
+                copyBtn.disabled = false;
+            }
+        };
+
+        window.closeShareModal = function() {
+            const modal = document.getElementById('share_modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.copyShareLink = function() {
+            const input = document.getElementById('share_link_input');
+            input.select();
+            document.execCommand('copy');
+            const copyBtn = document.getElementById('copy_share_btn');
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copié !';
+                copyBtn.disabled = true;
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier le lien';
+                    copyBtn.disabled = false;
+                }, 1500);
+            }
+        };
+
+        window.downloadQrCode = function() {
+            const qrImg = document.getElementById('qrcode_image');
+
+            if (qrImg && qrImg.src) {
+                fetch(qrImg.src)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const blobUrl = window.URL.createObjectURL(blob);
+
+                        const link = document.createElement('a');
+                        link.href = blobUrl;
+                        link.download = 'qrcode.png';
+
+                        document.body.appendChild(link);
+                        link.click();
+
+                        document.body.removeChild(link);
+                        window.URL.revokeObjectURL(blobUrl);
+                    })
+                    .catch(error => {
+                        console.error('Erreur téléchargement QR Code:', error);
+                        alert('Impossible de télécharger le QR Code.');
+                    });
+            }
+        };
+
+        window.shareEventFromCard = function(e, title, absoluteUrl) {
+            // 1. CRUCIAL : Empêche le clic d'ouvrir la page de l'événement
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            const shareData = {
+                title: title + ' | EvenPass',
+                text: 'Je viens de trouver cet événement sur EvenPass ! Prends tes billets avant que ça soit complet 🎟️',
+                url: absoluteUrl
+            };
+
+            // 2. Web Share API pour Mobile
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Partage réussi'))
+                    .catch((error) => console.log('Partage annulé ou échoué', error));
+            } else {
+                // 3. Fallback PC : Copie dans le presse-papier
+                navigator.clipboard.writeText(absoluteUrl).then(() => {
+                    Toastify({
+                        text: "Lien copié dans le presse-papier ! 🔗",
+                        duration: 3000,
+                        close: true,
+                        gravity: "bottom",
+                        position: "right",
+                        style: {
+                            background: "#0052FF",
+                            color: "#FFFFFF",
+                            borderRadius: "8px",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            fontWeight: "700",
+                            fontSize: "14px",
+                            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
+                            padding: "16px 24px"
+                        }
+                    }).showToast();
+                }).catch(err => {
+                    console.error('Erreur lors de la copie du lien : ', err);
+                });
+            }
+        }
+
+        function shareEventFromCard(e) {
+
+            // Empêche l'ouverture d'un lien parent
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            // Le lien actuel
+            const absoluteUrl = window.location.href;
+
+            // Titre optionnel
+            const title = document.title;
+
+            const shareData = {
+                title: title,
+                text: 'Je viens de trouver cette page ! 🔗',
+                url: absoluteUrl
+            };
+
+            // =========================
+            // MOBILE → partage natif
+            // =========================
+            if (navigator.share) {
+
+                navigator.share(shareData)
+                    .then(() => console.log('Partage réussi'))
+                    .catch((error) => {
+                        console.log('Partage annulé', error);
+                    });
+
+            } else {
+
+                // =========================
+                // PC → modal QR Code
+                // =========================
+
+                const modal = document.getElementById('share_modal');
+
+                if (modal) {
+                    modal.classList.remove('hidden');
+                }
+
+                // Input lien
+                document.getElementById('share_link_input').value = absoluteUrl;
+
+                // Elements QR
+                const qrImg = document.getElementById('qrcode_image');
+                const qrPlaceholder = document.getElementById('qrcode_placeholder');
+
+                qrImg.classList.add('hidden');
+                qrPlaceholder.classList.remove('hidden');
+
+                // Génération QR Code
+                const qrUrl =
+                    `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(absoluteUrl)}`;
+
+                qrImg.src = qrUrl;
+
+                qrImg.onload = function() {
+                    qrPlaceholder.classList.add('hidden');
+                    qrImg.classList.remove('hidden');
+                };
+            }
+        }
+    </script>
+
     <script>
         // Variables globales du formulaire
         let chosenPaymentAmount = 25;
