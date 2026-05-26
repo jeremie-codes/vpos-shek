@@ -123,7 +123,7 @@
                 <div class="flex flex-col w-full gap-2 mb-2">
                     <input id="share_link_input" type="text" readonly class="w-full text-xs border rounded-lg opacity-0 cursor-auto text-slate-700 bg-slate-50" />
 
-                    <button onclick="shareEventFromCard(event)" class="flex items-center justify-center w-full gap-2 py-2 font-semibold text-blue-700 bg-blue-100 rounded-lg hover:bg-blue-200">
+                    <button onclick="shareLinkAnyWhere(event)" class="flex items-center justify-center w-full gap-2 py-2 font-semibold text-blue-700 bg-blue-100 rounded-lg hover:bg-blue-200">
                         <i class="fa fa-share"></i>
                         Partager ailleurs
                     </button>
@@ -320,32 +320,47 @@
                         </h3>
                     </div>
 
-                    <div id="preset_amounts_container" class="grid grid-cols-5 gap-2 mb-3.5 ">
+                    <div id="preset_amounts_container_usd" class="grid grid-cols-5 gap-2 mb-3.5 ">
                         <button type="button" onclick="setPresetValue(10, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10
-                            <span class="currency-label">$</span></button>
+                            <span>$</span></button>
                         <button type="button" onclick="setPresetValue(25, this)"
                             class="p-1 text-sm font-semibold text-blue-800 transition-all border-blue-500 shadow-inner preset-btn dynamic-view-panel active bg-blue-50 rounded-xl ring-1 ring-blue-500/20">25
-                            <span class="currency-label">$</span></button>
+                            <span>$</span></button>
                         <button type="button" onclick="setPresetValue(50, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50
-                            <span class="currency-label">$</span></button>
+                            <span>$</span></button>
                         <button type="button" onclick="setPresetValue(100, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">100
-                            <span class="currency-label">$</span></button>
+                            <span>$</span></button>
                         <button type="button" onclick="setPresetValue(250, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">250
-                            <span class="currency-label">$</span></button>
+                            <span>$</span></button>
+                    </div>
+
+                    <div id="preset_amounts_container_cdf" class="grid grid-cols-5 gap-2 mb-3.5 hidden">
+                        <button type="button" onclick="setPresetValue(10000, this)"
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10.000
+                            <span>FC</span></button>
+                        <button type="button" onclick="setPresetValue(25000, this)"
+                            class="p-1 text-sm font-semibold text-blue-800 transition-all border-blue-500 shadow-inner preset-btn dynamic-view-panel active bg-blue-50 rounded-xl ring-1 ring-blue-500/20">25.000
+                            <span>FC</span></button>
+                        <button type="button" onclick="setPresetValue(50000, this)"
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50.000
+                            <span>FC</span></button>
+                        <button type="button" onclick="setPresetValue(100000, this)"
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">100.000
+                            <span>FC</span></button>
+                        <button type="button" onclick="setPresetValue(200000, this)"
+                            class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">200.000
+                            <span>FC</span></button>
                     </div>
 
                     <div class="grid items-center grid-cols-3 gap-4">
                         <div class="col-span-2 dynamic-view-panel active">
-                            <label id="amount_input_label" class="block mb-1 text-xs font-semibold text-slate-500">Ou
-                                saisir un montant sur-mesure (<span class="currency-label">USD</span>)</label>
+                            <label id="amount_input_label" class="block mb-1 text-xs font-semibold text-slate-500">
+                                Ou saisir le montant de votre choix  (<span class="currency-label">USD</span>)</label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div id="input_currency_sign"
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-bold pointer-events-none text-slate-500">
-                                    $</div>
                                 <input type="number" id="custom_amount_input" min="1"
                                     placeholder="Saisir le montant..." oninput="updateCustomAmountValue(this.value)"
                                     class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
@@ -369,7 +384,7 @@
                         class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
                         <span
                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">3</span>
-                        <span>Moyen de paiement de confiance</span>
+                        <span>Sélectionner le Moyen de paiement</span>
                     </h3>
 
                     <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -385,7 +400,7 @@
                                     </div>
                                     <div>
                                         <p class="text-xs font-bold text-slate-800">Mobile Money</p>
-                                        <p class="text-[10.5px] text-slate-500 font-normal">M-pesa, Orange, Airtel</p>
+                                        <p class="text-[10.5px] text-slate-500 font-normal">M-pesa, Orange, Airtel, Africell</p>
                                     </div>
                                 </div>
                                 <div
@@ -618,51 +633,7 @@
             }
         };
 
-        window.shareEventFromCard = function(e, title, absoluteUrl) {
-            // 1. CRUCIAL : Empêche le clic d'ouvrir la page de l'événement
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            const shareData = {
-                title: title + ' | EvenPass',
-                text: 'Je viens de trouver cet événement sur EvenPass ! Prends tes billets avant que ça soit complet 🎟️',
-                url: absoluteUrl
-            };
-
-            // 2. Web Share API pour Mobile
-            if (navigator.share) {
-                navigator.share(shareData)
-                    .then(() => console.log('Partage réussi'))
-                    .catch((error) => console.log('Partage annulé ou échoué', error));
-            } else {
-                // 3. Fallback PC : Copie dans le presse-papier
-                navigator.clipboard.writeText(absoluteUrl).then(() => {
-                    Toastify({
-                        text: "Lien copié dans le presse-papier ! 🔗",
-                        duration: 3000,
-                        close: true,
-                        gravity: "bottom",
-                        position: "right",
-                        style: {
-                            background: "#0052FF",
-                            color: "#FFFFFF",
-                            borderRadius: "8px",
-                            fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            fontWeight: "700",
-                            fontSize: "14px",
-                            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
-                            padding: "16px 24px"
-                        }
-                    }).showToast();
-                }).catch(err => {
-                    console.error('Erreur lors de la copie du lien : ', err);
-                });
-            }
-        }
-
-        function shareEventFromCard(e) {
+        window.shareLinkAnyWhere = function(e) {
 
             // Empêche l'ouverture d'un lien parent
             if (e) {
@@ -677,8 +648,7 @@
             const title = document.title;
 
             const shareData = {
-                title: title,
-                text: 'Je viens de trouver cette page ! 🔗',
+                text: "Cliquez sur le lien ci-dessous pour rejoindre la page de contribution!",
                 url: absoluteUrl
             };
 
@@ -782,23 +752,25 @@
         function updateCurrency(currency) {
             chosenCurrency = currency;
 
-            const presetContainer = document.getElementById('preset_amounts_container');
+            const presetContainerUsd = document.getElementById('preset_amounts_container_usd');
+            const presetContainerCdf = document.getElementById('preset_amounts_container_cdf');
             const inputLabel = document.getElementById('amount_input_label');
 
             if (currency === 'USD') {
-                presetContainer.classList.remove('hidden');
-                inputLabel.textContent = "Ou saisir un montant sur-mesure (USD)";
+                presetContainerUsd.classList.remove('hidden');
+                presetContainerCdf.classList.add('hidden');
+                inputLabel.textContent = "Ou saisir le montant de votre choix (USD)";
             } else {
-                presetContainer.classList.add('hidden');
-                inputLabel.textContent = "Saisir le montant de votre choix (" + currency + ")";
+                presetContainerCdf.classList.remove('hidden');
+                presetContainerUsd.classList.add('hidden');
+                inputLabel.textContent = "Ou saisir le montant de votre choix (CDF)";
             }
 
             const labels = document.querySelectorAll('.currency-label');
             labels.forEach(label => {
-                label.textContent = currency === 'USD' ? '$' : currency;
+                label.textContent = currency === 'USD' ? '$' : 'FC';
             });
 
-            document.getElementById('input_currency_sign').textContent = currencySymbols[currency] || currency;
             updateSubmitButtonText();
         }
 
