@@ -194,7 +194,7 @@
         <div
             class="relative flex flex-col justify-between p-6 mb-2 bg-white border shadow-md lg:col-span-7 md:p-10 shadow-slate-200 rounded-3xl">
             <!-- Main Interactive Form -->
-            <form id="donationForm" onsubmit="event.preventDefault(); simulateProcess();" class="space-y-6">
+            <form id="donationForm" onsubmit="event.preventDefault(); paymentProcess();" class="space-y-6">
 
                 <!-- STEP 1: Vos Coordonnées -->
                 <div class="transition-all duration-300">
@@ -211,7 +211,7 @@
                         <div class="flex items-center h-5">
                             <!-- Ajout du onclick pour l'action de masquage complet -->
                             <input id="anonymous_donation" type="checkbox"
-                                onchange="toggleAnonymousDonation(this.checked)"
+                                onchange="toggleAnonymousPayment(this.checked)"
                                 class="w-4 h-4 text-blue-600 transition-all rounded cursor-pointer border-slate-300 focus:ring-blue-500/30 focus:ring-2">
                         </div>
                         <div class="text-xs">
@@ -470,7 +470,7 @@
             </form>
 
             <!-- SIMULATOR STATE OVERLAY -->
-            <div id="simulator_modal"
+            <div id="status_modal"
                 class="absolute inset-0 z-30 flex flex-col items-center justify-center hidden p-6 text-center bg-white/95 backdrop-blur-sm animate-fade-in">
 
                 <!-- BLOC D'ÉTAT GLOBAL DU PAIEMENT (affiché hors loading) -->
@@ -499,7 +499,7 @@
                         <p class="flex justify-between"><span>STATUT :</span> <span id="modal_receipt_status"
                                 class="font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>VALIDÉ</span></p>
                     </div>
-                    <button onclick="closeSimulatorModal()"
+                    <button onclick="closeStatusModal()"
                         class="mt-6 px-6 py-2.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors">
                         Faire une nouvelle transaction
                     </button>
@@ -520,7 +520,7 @@
                             class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition-all bg-blue-600 border border-transparent shadow-sm rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             <i class="fa-solid fa-rotate-right mr-2 mt-0.5"></i> Réessayer la vérification
                         </button>
-                        <button type="button" onclick="closeSimulatorModal()"
+                        <button type="button" onclick="closeStatusModal()"
                             class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium transition-all bg-white border shadow-sm rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50">
                             Fermer la fenêtre
                         </button>
@@ -548,6 +548,25 @@
 
     <!-- SCRIPT DE COMPORTEMENT EXÉCUTABLE DE LA PAGE -->
     <script>
+
+        window.resetInitState = function() {
+            const container = document.getElementById('personal_fields_container');
+            container.classList.remove('hidden');
+
+            // Réinitialisation de l'état du formulaire
+            chosenPaymentAmount = 25;
+            activePaymentMethod = 'mobile';
+            chosenCurrency = 'USD';
+
+            // Réinitialisation des champs du formulaire
+            document.getElementById('custom_amount_input').value = 25;
+            document.getElementById('currency_selector').value = 'USD';
+            setPresetValue(25, document.querySelector('#preset_amounts_container_usd .preset-btn:nth-child(2)'));
+
+            // Affichage de la section mobile par défaut
+            togglePaymentSection('mobile');
+        };
+
         // Fonction magique pour charger le script uniquement quand on en a besoin
         window.showShareModal = function() {
             const modal = document.getElementById('share_modal');
@@ -711,7 +730,7 @@
             'CDF': 'FC',
         };
 
-        function toggleAnonymousDonation(isAnonymous) {
+        function toggleAnonymousPayment(isAnonymous) {
             const container = document.getElementById('personal_fields_container');
             const fieldsToToggle = [
                 'donor_name',
@@ -854,7 +873,7 @@
             }
         };
 
-        window.simulateProcess = function() {
+        window.paymentProcess = function() {
             if (chosenPaymentAmount <= 0) {
                 showModalError("Montant invalide", "Veuillez saisir un montant de don supérieur à 0.");
                 return;
@@ -877,7 +896,7 @@
                 return;
             }
 
-            const modal = document.getElementById('simulator_modal');
+            const modal = document.getElementById('status_modal');
             const modalLoading = document.getElementById('modal_loading_view');
             const modalStatus = document.getElementById('modal_status_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
@@ -1005,7 +1024,7 @@
         }
 
         function showModalFinalState(isSuccess, title, orderNumber, errorMessage = "") {
-            const modal = document.getElementById('simulator_modal');
+            const modal = document.getElementById('status_modal');
             const modalLoading = document.getElementById('modal_loading_view');
             const modalStatus = document.getElementById('modal_status_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
@@ -1088,7 +1107,7 @@
         }
 
         function showModalTimeoutState(orderNumber, customMsg = "") {
-            const modal = document.getElementById('simulator_modal');
+            const modal = document.getElementById('status_modal');
             const modalLoading = document.getElementById('modal_loading_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
             const modalStatus = document.getElementById('modal_status_view');
@@ -1111,8 +1130,9 @@
             showModalFinalState(false, title, "N/A", message);
         }
 
-        function closeSimulatorModal() {
-            document.getElementById('simulator_modal').classList.add('hidden');
+        function closeStatusModal() {
+            document.getElementById('status_modal').classList.add('hidden');
+            resetInitState()
 
             const modalLoading = document.getElementById('modal_loading_view');
             const labelContainer = document.getElementById('loading_notice');

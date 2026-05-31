@@ -149,7 +149,7 @@ class PaymentController extends Controller
                         'code'           => $transactionCode,
                         'amount'         => $amount,
                         'currency'       => $currency,
-                        'phone'          => null, // Pas de numéro enregistré pour le paiement par carte anonyme
+                        'phone'          => null,
                         'payment_method' => 'card',
                         'order_number'   => $result['orderNumber'],
                         'status'         => 'pending',
@@ -164,7 +164,8 @@ class PaymentController extends Controller
 
                 return response()->json([
                     'status' => false,
-                    'message' => $result['message'] ?? 'Echec paiement carte'
+                    'message' => $result['message'] ?? 'Echec paiement carte',
+                    'details' => $result
                 ]);
             }
 

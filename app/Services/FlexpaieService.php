@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class FlexpaieService
 {
-    const BASE_URL_PHONE = "https://backend.flexpay.cd/api/rest/v1/paymentService";
-    const BASE_URL_CARD = "https://cardpayment.flexpay.cd/v1.1/pay";
+    const BASE_URL = "https://corporateapi.flexpay.cd/api/rest/v1/paymentService";
     const BASE_URL_CHECK = "https://apicheck.flexpaie.com/api/rest/v1/check/";
 
     const SUCCESS = 0;
@@ -22,14 +21,14 @@ class FlexpaieService
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
             'Content-Type' => 'application/json',
-        ])->post(self::BASE_URL_PHONE, [
+        ])->post(self::BASE_URL, [
             'merchant' => 'SHEKINAH_TABERNACLE',
             'type' => "1",
             'reference' => $this->generateRandomCode(6),
             'phone' => $phone,
             'amount' => $amount,
             'currency' => $currency,
-            'callbackUrl' => $callbackUrl,
+            'callback_url' => $callbackUrl,
         ]);
 
         return $response->json();
@@ -38,14 +37,15 @@ class FlexpaieService
     public function cardPayment($amount, $currency, $callbackUrl, $approveUrl, $cancelUrl, $declineUrl): array
     {
         $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . config('services.flexpay.token'),
             'Content-Type' => 'application/json',
-        ])->post(self::BASE_URL_CARD, [
-            'authorization' => 'Bearer ' . config('services.flexpay.token'),
+        ])->post(self::BASE_URL, [
             'merchant' => 'SHEKINAH_TABERNACLE',
             'reference' => $this->generateRandomCode(6),
             'amount' => $amount,
             'currency' => $currency,
-            'description' => "Paiement et recharge de la FlexCard",
+            'type' => "2",
+            'description' => "Paiement vpos de Shekinah Tabernacle",
             'callback_url' => $callbackUrl,
             'approve_url' => $approveUrl,
             'cancel_url' => $cancelUrl,
