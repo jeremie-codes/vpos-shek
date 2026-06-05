@@ -1,0 +1,101 @@
+{
+    "Partager": "Partager",
+    "Partager cette page": "Partager cette page",
+    "Partager ailleurs": "Partager ailleurs",
+    "Copier le lien": "Copier le lien",
+    "Copié !": "Copié !",
+    "Télécharger le QR Code": "Télécharger le QR Code",
+    "Génération du QR Code...": "Génération du QR Code...",
+
+    "Dons pour la reconstruction": "Dons pour la reconstruction",
+    "Soutenir activement les activités de l'église.": "Soutenir activement les activités de l'église.",
+    "Méthodes de paiement disponible": "Méthodes de paiement disponible",
+
+    "Coordonnées du Donateur": "Coordonnées du Donateur",
+    "Contribuer de manière anonyme ?": "Contribuer de manière anonyme ?",
+    "Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.": "Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.",
+
+    "Prénom": "Prénom",
+    "Nom": "Nom",
+    "Adresse e-mail (optionnel)": "Adresse e-mail (optionnel)",
+    "Organisation": "Organisation",
+    "Choisir une organisation": "Choisir une organisation",
+    "Autres": "Autres",
+
+    "Pays": "Pays",
+    "Choisir un pays": "Choisir un pays",
+    "Ville": "Ville",
+
+    "Définir le Montant": "Définir le Montant",
+    "Ou saisir le montant de votre choix": "Ou saisir le montant de votre choix",
+    "Saisir le montant": "Saisir le montant",
+    "Devise": "Devise",
+
+    "Sélectionner le Moyen de paiement": "Sélectionner le Moyen de paiement",
+
+    "Mobile Money": "Mobile Money",
+    "Carte de crédit": "Carte de crédit",
+    "Visa, Mastercard, etc.": "Visa, Mastercard, etc.",
+
+    "Numéro de téléphone mobile": "Numéro de téléphone mobile",
+    "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).": "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).",
+
+    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).",
+
+    "Confirmer": "Confirmer",
+
+    "Statut du paiement": "Statut du paiement",
+    "Don reçu avec succès !": "Don reçu avec succès !",
+    "Merci pour votre don !": "Merci pour votre don !",
+    "La communauté vous remercie pour votre don.": "La communauté vous remercie pour votre don.",
+
+    "Référence": "Référence",
+    "Donateur": "Donateur",
+    "Canal": "Canal",
+    "Montant": "Montant",
+    "Statut": "Statut",
+
+    "VALIDÉ": "VALIDÉ",
+    "EN ATTENTE": "EN ATTENTE",
+    "ÉCHOUÉ": "ÉCHOUÉ",
+
+    "Faire une nouvelle transaction": "Faire une nouvelle transaction",
+
+    "Le délai de vérification a expiré": "Le délai de vérification a expiré",
+    "Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous parvenir.": "Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous parvenir.",
+    "Réessayer la vérification": "Réessayer la vérification",
+    "Fermer": "Fermer",
+
+    "Saisie PIN Mobile Money requise...": "Saisie PIN Mobile Money requise...",
+    "Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le téléphone pour valider le transfert.": "Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le téléphone pour valider le transfert.",
+    "En attente de la réponse de l'opérateur...": "En attente de la réponse de l'opérateur...",
+
+    "Montant invalide": "Montant invalide",
+    "Veuillez saisir un montant de don supérieur à 0.": "Veuillez saisir un montant de don supérieur à 0.",
+
+    "Numéro invalide": "Numéro invalide",
+    "Le numéro de téléphone doit contenir exactement 9 chiffres.": "Le numéro de téléphone doit contenir exactement 9 chiffres.",
+
+    "Initialisation du paiement en cours...": "Initialisation du paiement en cours...",
+    "Échec de l'initialisation": "Échec de l'initialisation",
+    "Impossible de créer la transaction sur le serveur.": "Impossible de créer la transaction sur le serveur.",
+
+    "Veuillez valider le message push envoyé sur votre téléphone...": "Veuillez valider le message push envoyé sur votre téléphone...",
+
+    "Erreur serveur": "Erreur serveur",
+    "Une erreur est survenue lors de la communication avec le serveur.": "Une erreur est survenue lors de la communication avec le serveur.",
+
+    "Paiement échoué ou annulé": "Paiement échoué ou annulé",
+    "La transaction a été rejetée par l'opérateur mobile.": "La transaction a été rejetée par l'opérateur mobile.",
+
+    "Transaction introuvable": "Transaction introuvable",
+    "Le numéro de référence n'existe pas sur le serveur.": "Le numéro de référence n'existe pas sur le serveur.",
+
+    "Votre paiement est en attente de validation.": "Votre paiement est en attente de validation.",
+    "Le paiement a échoué. Veuillez réessayer.": "Le paiement a échoué. Veuillez réessayer.",
+
+    "Anonyme": "Anonyme",
+    "Carte de Crédit / Débit": "Carte de Crédit / Débit",
+
+    "Vérification du statut": "Vérification du statut",
+}

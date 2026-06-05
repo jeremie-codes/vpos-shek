@@ -97,7 +97,8 @@ class PaymentController extends Controller
                     $amount,
                     '243' . $phone,
                     $currency,
-                    route('payment.callback', ['code' => $transactionCode])
+                    route('payment.callback', ['code' => $transactionCode]),
+                    $user->firstname . ' ' . $user->lastname
                 );
 
                 if (($result['code'] ?? null) == "0") {

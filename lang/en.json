@@ -1,0 +1,101 @@
+{
+    "Partager": "Share",
+    "Partager cette page": "Share this page",
+    "Partager ailleurs": "Share elsewhere",
+    "Copier le lien": "Copy link",
+    "Copié !": "Copied!",
+    "Télécharger le QR Code": "Download QR Code",
+    "Génération du QR Code...": "Generating QR Code...",
+
+    "Dons pour la reconstruction": "Donations for reconstruction",
+    "Soutenir activement les activités de l'église.": "Actively support church activities.",
+    "Méthodes de paiement disponible": "Available payment methods",
+
+    "Coordonnées du Donateur": "Donor Information",
+    "Contribuer de manière anonyme ?": "Contribute anonymously?",
+    "Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.": "Check this box if you do not wish to provide your personal information.",
+
+    "Prénom": "First Name",
+    "Nom": "Last Name",
+    "Adresse e-mail (optionnel)": "Email Address (optional)",
+    "Organisation": "Organization",
+    "Choisir une organisation": "Choose an organization",
+    "Autres": "Others",
+
+    "Pays": "Country",
+    "Choisir un pays": "Choose a country",
+    "Ville": "City",
+
+    "Définir le Montant": "Define Amount",
+    "Ou saisir le montant de votre choix": "Or enter your desired amount",
+    "Saisir le montant": "Enter amount",
+    "Devise": "Currency",
+
+    "Sélectionner le Moyen de paiement": "Select Payment Method",
+
+    "Mobile Money": "Mobile Money",
+    "Carte de crédit": "Credit Card",
+    "Visa, Mastercard, etc.": "Visa, Mastercard, etc.",
+
+    "Numéro de téléphone mobile": "Mobile Phone Number",
+    "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).": "Enter the remaining 9 digits without the leading 0 (example: 812345678).",
+
+    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "You will be redirected to a secure payment page to enter your card details (card number, expiration date, CVV).",
+
+    "Confirmer": "Confirm",
+
+    "Statut du paiement": "Payment Status",
+    "Don reçu avec succès !": "Donation received successfully!",
+    "Merci pour votre don !": "Thank you for your donation!",
+    "La communauté vous remercie pour votre don.": "The community thanks you for your donation.",
+
+    "Référence": "Reference",
+    "Donateur": "Donor",
+    "Canal": "Channel",
+    "Montant": "Amount",
+    "Statut": "Status",
+
+    "VALIDÉ": "VALIDATED",
+    "EN ATTENTE": "PENDING",
+    "ÉCHOUÉ": "FAILED",
+
+    "Faire une nouvelle transaction": "Make a new transaction",
+
+    "Le délai de vérification a expiré": "Verification timeout",
+    "Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous parvenir.": "You did not validate the transaction in time or the operator confirmation is delayed.",
+    "Réessayer la vérification": "Retry verification",
+    "Fermer": "Close",
+
+    "Saisie PIN Mobile Money requise...": "Mobile Money PIN Required...",
+    "Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le téléphone pour valider le transfert.": "An authorization request has been sent to your phone. Enter your secret PIN code to validate the transfer.",
+    "En attente de la réponse de l'opérateur...": "Waiting for operator response...",
+
+    "Montant invalide": "Invalid Amount",
+    "Veuillez saisir un montant de don supérieur à 0.": "Please enter a donation amount greater than 0.",
+
+    "Numéro invalide": "Invalid Number",
+    "Le numéro de téléphone doit contenir exactement 9 chiffres.": "The phone number must contain exactly 9 digits.",
+
+    "Initialisation du paiement en cours...": "Initializing Payment...",
+    "Échec de l'initialisation": "Initialization Failed",
+    "Impossible de créer la transaction sur le serveur.": "Unable to create the transaction on the server.",
+
+    "Veuillez valider le message push envoyé sur votre téléphone...": "Please validate the push message sent to your phone...",
+
+    "Erreur serveur": "Server Error",
+    "Une erreur est survenue lors de la communication avec le serveur.": "An error occurred while communicating with the server.",
+
+    "Paiement échoué ou annulé": "Payment Failed or Cancelled",
+    "La transaction a été rejetée par l'opérateur mobile.": "The transaction was rejected by the mobile operator.",
+
+    "Transaction introuvable": "Transaction Not Found",
+    "Le numéro de référence n'existe pas sur le serveur.": "The reference number does not exist on the server.",
+
+    "Votre paiement est en attente de validation.": "Your payment is pending validation.",
+    "Le paiement a échoué. Veuillez réessayer.": "The payment failed. Please try again.",
+
+    "Anonyme": "Anonymous",
+    "Carte de Crédit / Débit": "Credit / Debit Card",
+
+    "Vérification du statut": "Verify Status"
+}

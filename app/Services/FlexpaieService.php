@@ -16,7 +16,7 @@ class FlexpaieService
         return str_pad((string) random_int(0, 999999), $length, '0', STR_PAD_LEFT);
     }
 
-    public function mobilePayment($amount, $phone, $currency, $callbackUrl): array
+    public function mobilePayment($amount, $phone, $currency, $callbackUrl, $sender): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
@@ -25,6 +25,7 @@ class FlexpaieService
             'merchant' => 'SHEKINAH_TABERNACLE',
             'type' => "1",
             'reference' => $this->generateRandomCode(6),
+            'description' => "Don payé par $sender",
             'phone' => $phone,
             'amount' => $amount,
             'currency' => $currency,
@@ -34,7 +35,7 @@ class FlexpaieService
         return $response->json();
     }
 
-    public function cardPayment($amount, $currency, $callbackUrl, $approveUrl, $cancelUrl, $declineUrl): array
+    public function cardPayment($amount, $currency, $callbackUrl, $approveUrl, $cancelUrl, $declineUrl, $sender): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
@@ -45,7 +46,7 @@ class FlexpaieService
             'amount' => $amount,
             'currency' => $currency,
             'type' => "2",
-            'description' => "Paiement vpos de Shekinah Tabernacle",
+            'description' => "Don payé par $sender",
             'callback_url' => $callbackUrl,
             'approve_url' => $approveUrl,
             'cancel_url' => $cancelUrl,

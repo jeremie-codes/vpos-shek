@@ -101,7 +101,7 @@
         <!-- Bouton Partager -->
         <button onclick="showShareModal()" type="button"
             class="fixed z-40 flex items-center gap-2 px-4 py-2 font-bold text-white bg-blue-600 shadow-lg top-6 right-6 hover:bg-blue-700 rounded-xl">
-            <i class="fa-solid fa-share-nodes"></i> Partager
+            <i class="fa-solid fa-share-nodes"></i> {{ __('Partager') }}
         </button>
 
         <!-- Modal de partage avec QR code -->
@@ -111,7 +111,7 @@
                 <button onclick="closeShareModal()"
                     class="absolute text-xl top-3 right-3 text-slate-400 hover:text-slate-700"><i
                         class="fa-solid fa-xmark"></i></button>
-                <h3 class="mb-4 text-lg font-bold text-slate-800">Partager cette page</h3>
+                <h3 class="mb-4 text-lg font-bold text-slate-800">{{ __('Partager cette page') }}</h3>
                 <div class="flex justify-center p-2 mb-4 border bg-slate-50 rounded-xl border-slate-100">
                     <img id="qrcode_image" src="" alt="QR Code de partage" class="w-[200px] h-[200px] hidden" />
                     <div id="qrcode_placeholder"
@@ -128,7 +128,7 @@
                         Partager ailleurs
                     </button>
                     <button id="copy_share_btn" type="button" onclick="copyShareLink()" class="flex items-center justify-center w-full gap-2 py-2 font-semibold rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200">
-                        <i class="fa-regular fa-copy"></i> Copier le lien
+                        <i class="fa-regular fa-copy"></i> {{ __('Copier le lien') }}
                     </button>
                 </div>
                 <button onclick="downloadQrCode()"
@@ -139,14 +139,16 @@
 
         <!-- COLONNE GAUCHE (ILLUSTRATION, CONFIANCE & STATUTS SECURE) -->
         <div class="relative flex flex-col lg:col-span-5">
-            <div
-                class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
+            <div class="relative flex flex-col justify-between p-8 mb-2 overflow-hidden text-white border shadow-md lg:col-span-5 bg-slate-950 md:p-10 shadow-slate-200 rounded-3xl">
                 <!-- Arrière-plan stylisé -->
-                <div
-                    class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0">
-                </div>
+                <div class="absolute inset-0 bg-gradient-to-br border border-slate-white from-slate-950 via-[#0d1630] to-slate-950 z-0"></div>
                 <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
                 <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
+
+                <div class="absolute flex items-center gap-2 top-4 right-4">
+                    <a href="{{ route('index', ['locale' => 'fr']) }}">🇫🇷 FR</a>
+                    <a href="{{ route('index', ['locale' => 'en']) }}">🇬🇧 EN</a>
+                </div>
 
                 <div class="relative z-10 dynamic-view-panel active">
                     <!-- Organisation Header -->
@@ -156,11 +158,11 @@
 
                     <h4
                         class="mt-6 text-xl font-semibold leading-tight tracking-tight text-center text-white md:text-xl font-outfit">
-                        Dons pour la reconstruction
+                        {{ __('Dons pour la reconstruction') }}
                         {{-- Contribuez activement aux activités de la communauté Shekinah. --}}
                     </h4>
                     <p class="text-sm leading-relaxed text-center text-slate-300">
-                        Soutenir activement les activités de l'église.
+                        {{ __("Soutenir activement les activités de l'église.") }}
                     </p>
                 </div>
 
@@ -179,7 +181,7 @@
 
                     <div class="h-px bg-slate-800/60"></div>
                     <p class="text-white text-center gap-1.5 my-3">
-                        Méthodes de paiement disponible
+                        {{ __('Méthodes de paiement disponible') }}
                     </p>
 
                     <div class="flex items-center gap-4 text-xs text-slate-700">
@@ -202,7 +204,7 @@
                         class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
                         <span
                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">1</span>
-                        <span>Coordonnées du Donateur</span>
+                        <span>{{ __('Coordonnées du Donateur') }}</span>
                     </h3>
 
                     <!-- CASE À COCHER : FAIRE UN DON ANONYME -->
@@ -210,23 +212,19 @@
                         class="flex items-start gap-3 p-3 mb-4 transition-all border bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100/70">
                         <div class="flex items-center h-5">
                             <!-- Ajout du onclick pour l'action de masquage complet -->
-                            <input id="anonymous_donation" type="checkbox"
-                                onchange="toggleAnonymousPayment(this.checked)"
-                                class="w-4 h-4 text-blue-600 transition-all rounded cursor-pointer border-slate-300 focus:ring-blue-500/30 focus:ring-2">
+                            <input id="anonymous_donation" type="checkbox" onchange="toggleAnonymousPayment(this.checked)" class="w-4 h-4 text-blue-600 transition-all rounded cursor-pointer border-slate-300 focus:ring-blue-500/30 focus:ring-2">
                         </div>
                         <div class="text-xs">
                             <label for="anonymous_donation"
-                                class="font-bold cursor-pointer select-none text-slate-700">Contribuer de manière
-                                anonyme?</label>
-                            <p class="text-slate-500 font-normal mt-0.5">Cochez cette case si vous ne souhaitez pas
-                                renseigner vos informations personnelles.</p>
+                                class="font-bold cursor-pointer select-none text-slate-700">{{ __("Contribuer de manière anonyme ?") }}</label>
+                            <p class="text-slate-500 font-normal mt-0.5">{{ __("Cochez cette case si vous ne souhaitez pas renseigner vos informations personnelles.") }}</p>
                         </div>
                     </div>
 
                     <!-- CONTENEUR DES CHAMPS PERSONNELS (Masqué complètement si anonyme) -->
                     <div id="personal_fields_container" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Prénom : <span
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Prénom') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
@@ -239,7 +237,7 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nom : <span
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Nom') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
@@ -252,7 +250,7 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Adresse e-mail (optionnel)
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Adresse e-mail (optionnel)') }}
                                 : </label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
@@ -265,29 +263,28 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Organisation : <span
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Organisation') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <select id="donor_org" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
-                                    <option value="">Choisir une organisation</option>
+                                    <option value="">{{ __('Choisir une organisation') }}</option>
                                     <option value="CD">Shekinah</option>
-                                    <option value="FR">Autres</option>
+                                    <option value="FR">{{ __('Autres') }}</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Pays : <span
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Pays') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
                                 <select id="donor_country" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
-                                    <option value="">Choisir un pays</option>
+                                    <option value="">{{ __('Choisir un pays') }}</option>
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
@@ -296,14 +293,14 @@
                         </div>
 
                         <div class="dynamic-view-panel active">
-                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ville : <span
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Ville') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-solid fa-globe"></i>
                                 </div>
-                                <input type="text" id="donor_city" required placeholder="Ville"
+                                <input type="text" id="donor_city" required placeholder="{{ __('Ville') }}"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
@@ -316,7 +313,7 @@
                         <h3 class="flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-slate-700">
                             <span
                                 class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">2</span>
-                            <span>Définir le Montant</span>
+                            <span>{{ __('Définir le Montant') }}</span>
                         </h3>
                     </div>
 
@@ -359,16 +356,16 @@
                     <div class="grid items-center grid-cols-3 gap-4">
                         <div class="col-span-2 dynamic-view-panel active">
                             <label id="amount_input_label" class="block mb-1 text-xs font-semibold text-slate-500">
-                                Ou saisir le montant de votre choix  (<span class="currency-label">USD</span>)</label>
+                                {{ __('Ou saisir le montant de votre choix') }}  (<span class="currency-label">USD</span>)</label>
                             <div class="relative rounded-lg shadow-sm">
                                 <input type="number" id="custom_amount_input" min="1"
-                                    placeholder="Saisir le montant..." oninput="updateCustomAmountValue(this.value)"
+                                    placeholder="{{ __('Saisir le montant') }}..." oninput="updateCustomAmountValue(this.value)"
                                     class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                                     value="25">
                             </div>
                         </div>
                         <div class="dynamic-view-panel active">
-                            <label for="currency_selector" class="text-xs font-bold text-slate-500">Devise :</label>
+                            <label for="currency_selector" class="text-xs font-bold text-slate-500">{{ __('Devise') }} :</label>
                             <select id="currency_selector" onchange="updateCurrency(this.value)"
                                 class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                                 <option value="USD">USD ($)</option>
@@ -384,7 +381,7 @@
                         class="flex items-center gap-2 pb-2 mb-3 text-sm font-bold tracking-wider uppercase border-b text-slate-700 border-slate-100">
                         <span
                             class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center">3</span>
-                        <span>Sélectionner le Moyen de paiement</span>
+                        <span>{{ __('Sélectionner le Moyen de paiement') }}</span>
                     </h3>
 
                     <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -399,7 +396,7 @@
                                         <i class="fa-solid fa-mobile-screen-button"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs font-bold text-slate-800">Mobile Money</p>
+                                        <p class="text-xs font-bold text-slate-800">{{ __('Mobile Money') }}</p>
                                         <p class="text-[10.5px] text-slate-500 font-normal">M-pesa, Orange, Airtel, Africell</p>
                                     </div>
                                 </div>
@@ -420,8 +417,8 @@
                                         <i class="fa-solid fa-credit-card"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs font-bold text-slate-800">Carte de crédit</p>
-                                        <p class="text-[10.5px] text-slate-500 font-normal">Visa, Mastercard, etc.</p>
+                                        <p class="text-xs font-bold text-slate-800">{{ __('Carte de crédit') }}</p>
+                                        <p class="text-[10.5px] text-slate-500 font-normal">{{ __('Visa, Mastercard, etc.') }}</p>
                                     </div>
                                 </div>
                                 <div
@@ -435,7 +432,7 @@
                 <!-- SECTION CONDITIONNELLE : MOBILE MONEY -->
                 <div id="section_mobile" class="dynamic-view-panel active">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Numéro de téléphone mobile :
+                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __("Numéro de téléphone mobile") }} :
                             <span class="text-red-500">*</span></label>
                         <div class="relative rounded-lg shadow-sm">
                             <div
@@ -444,8 +441,7 @@
                             <input type="tel" id="mobile_phone" maxlength="9" required placeholder="812345678"
                                 class="block w-full pl-16 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm font-mono text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                         </div>
-                        <span class="block text-[10px] text-slate-700 mt-1">Saisir les 9 chiffres restants sans le
-                            premier 0 (exemple : 812345678).</span>
+                        <span class="block text-[10px] text-slate-700 mt-1">{{ __("Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).") }}</span>
                     </div>
                 </div>
 
@@ -453,8 +449,7 @@
                 <div id="section_card" class="dynamic-view-panel">
                     <div class="p-4 space-y-4 border border-blue-100 bg-blue-50 rounded-2xl md:p-5">
                         <p class="block mb-1 text-xs font-semibold text-slate-600">
-                            Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre
-                            carte bancaire (numéro, date d'expiration, CVV).
+                            {{ __("Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).") }}
                         </p>
                     </div>
                 </div>
@@ -463,7 +458,7 @@
                 <div class="pt-2">
                     <button type="submit" id="submit_donation_button"
                         class="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20 active:shadow-sm transform active:scale-[0.99] transition-all text-sm flex items-center justify-center gap-2">
-                        <span>Confirmer <span id="display_amount_button">25</span> <span
+                        <span>{{ __('Confirmer') }} <span id="display_amount_button">25</span> <span
                                 id="display_currency_button">USD</span></span>
                     </button>
                 </div>
@@ -480,49 +475,47 @@
                         <i id="status_icon" class=""></i>
                     </div>
                     <!-- Correction : h4 ciblé correctement et ID corrigé -->
-                    <h4 class="text-xl font-semibold text-slate-900 font-outfit" id="status_message_title">Don reçu
-                        avec succès !</h4>
+                    <h4 class="text-xl font-semibold text-slate-900 font-outfit" id="status_message_title">Don reçu avec succès !</h4>
 
                     <!-- Séparation : Le texte général ne doit pas englober le span de montant pour éviter d'être écrasé -->
                     <p class="max-w-sm mt-2 text-xs leading-relaxed text-slate-500" id="status_message_text"></p>
 
                     <div
                         class="bg-slate-50 border border-slate-100 p-4 rounded-xl mt-5 w-full max-w-sm text-left font-mono text-[11px] text-slate-500 space-y-1.5 shadow-sm">
-                        <p class="flex justify-between"><span>RÉFÉRENCE :</span> <span
-                                class="font-bold text-slate-800" id="modal_receipt_ref">TXN-764923</span></p>
-                        <p class="flex justify-between"><span>DONATEUR :</span> <span class="text-slate-800"
-                                id="modal_receipt_donor">Jean-Claude</span></p>
-                        <p class="flex justify-between"><span>CANAL :</span> <span class="text-slate-800"
-                                id="modal_receipt_channel">Mobile Money M-PESA</span></p>
-                        <p class="flex justify-between"><span>MONTANT :</span> <span class="font-bold text-blue-800"
-                                id="modal_receipt_amount">0.00 $</span></p>
-                        <p class="flex justify-between"><span>STATUT :</span> <span id="modal_receipt_status"
-                                class="font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>VALIDÉ</span></p>
+                        <p class="flex justify-between"><span>{{ __('RÉFÉRENCE') }} :</span> <span
+                                class="font-bold text-slate-800" id="modal_receipt_ref"></span></p>
+                        <p class="flex justify-between"><span>{{ __('DONATEUR') }} :</span> <span class="text-slate-800"
+                                id="modal_receipt_donor"></span></p>
+                        <p class="flex justify-between"><span>{{ __('CANAL') }} :</span> <span class="text-slate-800"
+                                id="modal_receipt_channel"></span></p>
+                        <p class="flex justify-between"><span>{{ __('MONTANT') }} :</span> <span class="font-bold text-blue-800"
+                                id="modal_receipt_amount"></span></p>
+                        <p class="flex justify-between"><span>{{ __('STATUT') }} :</span> <span id="modal_receipt_status"
+                                class="font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i></span></p>
                     </div>
                     <button onclick="closeStatusModal()"
                         class="mt-6 px-6 py-2.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors">
-                        Faire une nouvelle transaction
+                        {{ __("Faire une nouvelle transaction") }}
                     </button>
                 </div>
 
                 <!-- TIMEOUT MODULE -->
                 <div id="modal_timeout_view" class="flex-col items-center hidden">
                     <div class="mb-1 text-3xl font-bold text-amber-500">⏱</div>
-                    <div class="text-base font-semibold text-red-500">Le délai de vérification a expiré</div>
+                    <div class="text-base font-semibold text-red-500">{{ __('Le délai de vérification a expiré') }}</div>
                     <!-- Correction : Ajout de la classe "timeout-message" attendue par le JS et retrait du code template string brut -->
                     <p class="px-4 mt-2 text-xs timeout-message text-slate-500">
-                        Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous
-                        parvenir.
+                        {{ __("Vous n'avez pas validé la transaction à temps ou la confirmation de l'opérateur tarde à nous parvenir.") }}
                     </p>
                     <div class="flex flex-col w-full max-w-xs gap-2 pt-4 mx-auto">
                         <!-- Correction : Utilisation dynamique via variable globale dans le JS plutôt que l'injection brute dans le HTML -->
                         <button type="button" onclick="retryVerification()"
                             class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition-all bg-blue-600 border border-transparent shadow-sm rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            <i class="fa-solid fa-rotate-right mr-2 mt-0.5"></i> Réessayer la vérification
+                            <i class="fa-solid fa-rotate-right mr-2 mt-0.5"></i> {{ __('Réessayer la vérification') }}
                         </button>
                         <button type="button" onclick="closeStatusModal()"
                             class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium transition-all bg-white border shadow-sm rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50">
-                            Fermer la fenêtre
+                            {{ __("Fermer la fenêtre") }}
                         </button>
                     </div>
                 </div>
@@ -531,14 +524,13 @@
                 <div id="modal_loading_view" class="flex flex-col items-center">
                     <div class="w-16 h-16 mb-3 border-4 rounded-full border-slate-200 border-t-blue-600 animate-spin">
                     </div>
-                    <h4 class="font-bold text-md text-slate-900 font-outfit">Saisie PIN Mobile Money requise...</h4>
+                    <h4 class="font-bold text-md text-slate-900 font-outfit">{{ __("Saisie PIN Mobile Money requise...") }}</h4>
                     <p class="text-slate-500 text-xs max-w-sm mt-1.5 leading-relaxed">
-                        Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le
-                        téléphone pour valider le transfert.
+                        {{ __("Un push d'autorisation a été émis sur votre mobile. Saisissez votre code PIN secret sur le téléphone pour valider le transfert.") }}
                     </p>
                     <div id="loading_notice"
                         class="mt-4 bg-slate-50 animate-pulse text-[10px] text-slate-700 border border-slate-200 px-3.5 py-2 rounded-lg font-mono">
-                        En attente de la réponse de l'opérateur...
+                        {{ __("En attente de la réponse de l'opérateur...") }}
                     </div>
                 </div>
             </div>
@@ -601,7 +593,7 @@
 
             const copyBtn = document.getElementById('copy_share_btn');
             if (copyBtn) {
-                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier le lien';
+                copyBtn.innerHTML = "<i class='fa-regular fa-copy'></i> {{ __('Copier le lien') }}";
                 copyBtn.disabled = false;
             }
         };
@@ -620,7 +612,7 @@
                 copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copié !';
                 copyBtn.disabled = true;
                 setTimeout(() => {
-                    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier le lien';
+                    copyBtn.innerHTML = "<i class='fa-regular fa-copy'></i> {{ __('Copier le lien') }}";
                     copyBtn.disabled = false;
                 }, 1500);
             }
@@ -875,7 +867,7 @@
 
         window.paymentProcess = function() {
             if (chosenPaymentAmount <= 0) {
-                showModalError("Montant invalide", "Veuillez saisir un montant de don supérieur à 0.");
+                showModalError("{{ __('Montant invalide') }}", "{{ __('Veuillez saisir un montant de don supérieur à 0.') }}");
                 return;
             }
 
@@ -892,7 +884,7 @@
             const phone = document.getElementById('mobile_phone').value;
 
             if (activePaymentMethod === 'mobile' && phone.length !== 9) {
-                showModalError("Numéro invalide", "Le numéro de téléphone doit contenir exactement 9 chiffres.");
+                showModalError("{{ __('Numéro invalide') }}", "{{ __('Le numéro de téléphone doit contenir exactement 9 chiffres.') }}");
                 return;
             }
 
@@ -910,7 +902,7 @@
             modalTimeout.classList.remove('flex');
 
             const processingNotice = document.getElementById('loading_notice');
-            if (processingNotice) processingNotice.textContent = "Initialisation du paiement en cours...";
+            if (processingNotice) processingNotice.textContent = "{{ __('Initialisation du paiement en cours...') }}";
 
             fetch("{{ route('vpos.purchase') }}", {
                     method: "POST",
@@ -935,8 +927,8 @@
                 .then(res => res.json())
                 .then(data => {
                     if (!data.status) {
-                        showModalError("Échec de l'initialisation", data.message ||
-                            "Impossible de créer la transaction sur le serveur.");
+                        showModalError("{{ __('Échec de l\'initialisation') }}", data.message ||
+                            "{{ __('Impossible de créer la transaction sur le serveur') }}.");
                         return;
                     }
 
@@ -949,14 +941,14 @@
 
                     if (activePaymentMethod === 'mobile') {
                         if (processingNotice) processingNotice.textContent =
-                            "Veuillez valider le message push envoyé sur votre téléphone...";
+                            "{{ __('Veuillez valider le message push envoyé sur votre téléphone...') }}";
                         checkTransactionStatus(currentOrderNumber, 1);
                     }
                 })
                 .catch(err => {
                     console.error(err);
-                    showModalError("Erreur serveur",
-                        "Une erreur est survenue lors de la communication avec le serveur.");
+                    showModalError("{{ __('Erreur serveur') }}",
+                        "{{ __('Une erreur est survenue lors de la communication avec le serveur.') }}");
                 });
         }
 
@@ -977,7 +969,7 @@
 
             if (processingNotice) {
                 processingNotice.innerHTML =
-                    `<span class="inline-block mr-2 animate-spin">⏳</span> Vérification du statut (${attempt}/${maxAttempts})...`;
+                    `<span class="inline-block mr-2 animate-spin">⏳</span> {{ __('Vérification du statut') }} (${attempt}/${maxAttempts})...`;
             }
 
             try {
@@ -985,19 +977,19 @@
                 const data = await res.json();
 
                 if (data.status === "success") {
-                    showModalFinalState(true, "Merci pour votre don !", orderNumber);
+                    showModalFinalState(true, "{{ __('Merci pour votre don !') }}", orderNumber);
                     return;
                 }
 
                 if (data.status === "failed" || data.status === "cancelled") {
-                    showModalFinalState(false, "Paiement échoué ou annulé", orderNumber,
-                        "La transaction a été rejetée par l'opérateur mobile.");
+                    showModalFinalState(false, "{{ __('Paiement échoué ou annulé') }}", orderNumber,
+                        "{{ __('La transaction a été rejetée par l\'opérateur mobile.') }}");
                     return;
                 }
 
                 if (data.status === "not_found") {
-                    showModalFinalState(false, "Transaction introuvable", orderNumber,
-                        "Le numéro de référence n'existe pas sur le serveur.");
+                    showModalFinalState(false, "{{ __('Transaction introuvable') }}", orderNumber,
+                        "{{ __('Le numéro de référence n\'existe pas sur le serveur.') }}");
                     return;
                 }
 
@@ -1012,13 +1004,13 @@
                 }
 
             } catch (error) {
-                console.error("Erreur lors de la vérification :", error);
+                console.error("{{ __('Erreur lors de la vérification') }} :", error);
                 if (attempt < maxAttempts) {
                     setTimeout(() => {
                         checkTransactionStatus(orderNumber, attempt + 1);
                     }, delay);
                 } else {
-                    showModalTimeoutState(orderNumber, "Erreur de connexion réseau lors du contrôle.");
+                    showModalTimeoutState(orderNumber, "{{ __('Erreur de connexion réseau lors du contrôle.') }}");
                 }
             }
         }
@@ -1050,20 +1042,20 @@
 
             const symbol = typeof currencySymbols !== 'undefined' ? (currencySymbols[chosenCurrency] || chosenCurrency) :
                 '$';
-            let message = `Le Fonds de Solidarité vous remercie chaleureusement pour votre don humanitaire.`;
+            let message = `{{ __('La communauté vous remercie pour votre don') }}`;
 
             if (isSuccess === false) {
                 iconClass = 'fa-solid fa-circle-xmark';
                 iconColor = 'bg-red-100 text-red-600 border-red-200';
                 statusLabel = '<i class="fa-solid fa-circle-xmark text-[8px] mr-1"></i> ÉCHOUÉ';
                 statusLabelColor = 'text-red-600';
-                message = errorMessage || "Le paiement a échoué. Veuillez réessayer.";
+                message = errorMessage || "{{ __('Le paiement a échoué. réessayer.') }}";
             } else if (isSuccess === 'pending') {
                 iconClass = 'fa-solid fa-clock';
                 iconColor = 'bg-amber-100 text-amber-500 border-amber-200';
                 statusLabel = '<i class="fa-solid fa-clock text-[8px] mr-1"></i> EN ATTENTE';
                 statusLabelColor = 'text-amber-500';
-                message = "Votre paiement est en attente de validation.";
+                message = "{{ __('Votre paiement est en attente de validation') }}.";
             }
 
             if (iconContainer && icon) {
@@ -1139,7 +1131,7 @@
             if (labelContainer) {
                 labelContainer.className =
                     "mt-4 bg-slate-50 animate-pulse text-[10px] text-slate-700 border border-slate-200 px-3.5 py-2 rounded-lg font-mono";
-                labelContainer.innerHTML = "En attente de la réponse de l'opérateur...";
+                labelContainer.innerHTML = "{{ __('En attente de la réponse de l\'opérateur...') }}";
             }
 
             document.getElementById('modal_status_view').classList.add('hidden');
