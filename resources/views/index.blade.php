@@ -145,7 +145,7 @@
                 <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
                 <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
 
-                <div class="absolute bg-indigo-600/20 top-4 right-4">
+                <div class="absolute bg-indigo-600/20 top-4 left-4">
                     <div class="relative z-20">
                         <button
                             id="languageBtn"
@@ -161,15 +161,15 @@
 
                         <div
                             id="languageDropdown"
-                            class="absolute right-0 z-50 hidden w-40 mt-2 border rounded-lg shadow-lg bg-slate-950">
+                            class="absolute left-0 z-50 hidden w-40 mt-2 border rounded-lg shadow-lg bg-slate-950">
 
                             <a href="{{ route('index', ['locale' => 'fr']) }}"
-                                class="block px-4 py-2 hover:bg-indigo-600/20">
+                                class="block px-4 py-2 text-white hover:bg-indigo-600/20">
                                 {{ __('Français') }}
                             </a>
 
                             <a href="{{ route('index', ['locale' => 'en']) }}"
-                                class="block px-4 py-2 hover:bg-indigo-600/20">
+                                class="block px-4 py-2 text-white hover:bg-indigo-600/20">
                                 {{ __('Anglais') }}
                             </a>
                         </div>
