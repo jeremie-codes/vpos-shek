@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement réussi - Vpos</title>
+    <title>{{ __('Paiement réussi') }} - Vpos</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome pour les icônes -->
@@ -21,47 +21,46 @@
     </style>
 </head>
 
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+<body class="flex items-center justify-center min-h-screen p-4 bg-slate-50">
 
     <div
-        class="bg-white rounded-2xl border shadow-xl p-8 max-w-md w-full text-center relative overflow-hidden">
+        class="relative w-full max-w-md p-8 overflow-hidden text-center bg-white border shadow-xl rounded-2xl">
 
         <!-- Indicateur visuel de succès -->
         <div
-            class="w-16 h-16 rounded-full bg-green-100 border border-green-200 text-green-600 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+            class="flex items-center justify-center w-16 h-16 mx-auto mb-4 text-3xl text-green-600 bg-green-100 border border-green-200 rounded-full shadow-inner">
             <i class="fa-solid fa-circle-check"></i>
         </div>
 
         <!-- Titre principal -->
-        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
-            Paiement réussi
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900">
+            {{ __('Paiement réussi') }}
         </h1>
 
         <!-- Message d'explication textuel -->
-        <p class="text-slate-500 text-sm mt-3 leading-relaxed px-2">
-            Merci pour votre générosité ! Votre paiement a été traité avec succès. Vous recevrez une confirmation par
-            e-mail sous peu.
+        <p class="px-2 mt-3 text-sm leading-relaxed text-slate-500">
+            {{ __("Merci pour votre générosité ! Votre paiement a été traité avec succès.") }}
         </p>
 
 
         <!-- Boutons d'actions -->
-        <div class="mt-7 flex flex-col gap-2">
+        <div class="flex flex-col gap-2 mt-7">
             <!-- Bouton principal pour retourner au formulaire de don -->
-            <a href="{{ route('index') }}"
-                class="w-full inline-flex justify-center items-center rounded-xl px-4 py-3 bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
-                <i class="fa-solid fa-arrow-rotate-left mr-2"></i> Réessayer un autre paiement
+            <a href="{{ route('index', ['locale' => app()->getLocale()]) }}"
+                class="inline-flex items-center justify-center w-full px-4 py-3 text-xs font-bold text-white transition-colors shadow-sm rounded-xl bg-slate-900 hover:bg-slate-800">
+                <i class="mr-2 fa-solid fa-arrow-rotate-left"></i> {{ __('Effectuer un autre paiement') }}
             </a>
 
             <!-- Lien secondaire pour contacter le support au besoin -->
             <a href="mailto:info@flexpaie.com"
-                class="w-full inline-flex justify-center items-center rounded-xl px-4 py-3 bg-white border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 transition-colors">
-                <i class="fa-solid fa-headset mr-2"></i> Contacter l'assistance
+                class="inline-flex items-center justify-center w-full px-4 py-3 text-xs font-semibold transition-colors bg-white border rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50">
+                <i class="mr-2 fa-solid fa-headset"></i> {{ __("Contacter l'assistance") }}
             </a>
         </div>
 
         <!-- Note de pied de page discrète -->
         <div class="mt-6 text-[10px] text-slate-400">
-            &copy; 2023 Plateforme Sécurisée VPOS
+            &copy; 2023 {{ __("Plateforme Sécurisée VPOS") }}
         </div>
     </div>
 

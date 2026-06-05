@@ -145,10 +145,52 @@
                 <div class="absolute top-0 z-0 rounded-full -left-10 w-80 h-80 bg-blue-600/10 blur-3xl"></div>
                 <div class="absolute bottom-0 z-0 rounded-full -right-10 w-80 h-80 bg-indigo-600/10 blur-3xl"></div>
 
-                <div class="absolute flex items-center gap-2 top-4 right-4">
-                    <a href="{{ route('index', ['locale' => 'fr']) }}">🇫🇷 FR</a>
-                    <a href="{{ route('index', ['locale' => 'en']) }}">🇬🇧 EN</a>
+                <div class="absolute bg-indigo-600/20 top-4 right-4">
+                    <div class="relative z-20">
+                        <button
+                            id="languageBtn"
+                            type="button"
+                            class="flex items-center gap-2 px-3 py-2 border rounded-lg shadow">
+
+                            <span>
+                                {{ app()->getLocale() == 'fr' ? 'FR' : 'EN' }}
+                            </span>
+
+                            <i class="text-xs fa-solid fa-chevron-down"></i>
+                        </button>
+
+                        <div
+                            id="languageDropdown"
+                            class="absolute right-0 z-50 hidden w-40 mt-2 border rounded-lg shadow-lg bg-slate-950">
+
+                            <a href="{{ route('index', ['locale' => 'fr']) }}"
+                                class="block px-4 py-2 hover:bg-indigo-600/20">
+                                {{ __('Français') }}
+                            </a>
+
+                            <a href="{{ route('index', ['locale' => 'en']) }}"
+                                class="block px-4 py-2 hover:bg-indigo-600/20">
+                                {{ __('Anglais') }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const btn = document.getElementById('languageBtn');
+                    const dropdown = document.getElementById('languageDropdown');
+
+                    btn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        dropdown.classList.toggle('hidden');
+                    });
+
+                    document.addEventListener('click', function () {
+                        dropdown.classList.add('hidden');
+                    });
+                });
+                </script>
 
                 <div class="relative z-10 dynamic-view-panel active">
                     <!-- Organisation Header -->

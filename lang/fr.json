@@ -98,4 +98,30 @@
     "Carte de Crédit / Débit": "Carte de Crédit / Débit",
 
     "Vérification du statut": "Vérification du statut",
+    "Français": "Français",
+    "Anglais": "Anglais",
+
+    "Paiement annulé": "Paiement annulé",
+
+    "Votre paiement a fait l'objet d'une annulation. Cela peut être dû à une action de votre part (annulation volontaire) ou à une interruption du processus de paiement (fermeture de la fenêtre, problème de connexion, etc.). Aucun fonds n'a été prélevé. Veuillez réessayer ou contacter notre support si le problème persiste.": "Votre paiement a fait l'objet d'une annulation. Cela peut être dû à une action de votre part (annulation volontaire) ou à une interruption du processus de paiement (fermeture de la fenêtre, problème de connexion, etc.). Aucun fonds n'a été prélevé. Veuillez réessayer ou contacter notre support si le problème persiste.",
+
+    "Réessayer un autre paiement": "Réessayer un autre paiement",
+
+    "Paiement réussi": "Paiement réussi",
+
+    "Merci pour votre générosité ! Votre paiement a été traité avec succès.": "Merci pour votre générosité ! Votre paiement a été traité avec succès.",
+
+    "Effectuer un autre paiement": "Effectuer un autre paiement",
+
+    "Contacter l'assistance": "Contacter l'assistance",
+
+    "Plateforme Sécurisée VPOS": "Plateforme Sécurisée VPOS",
+
+    "Échec du paiement": "Échec du paiement",
+    "Paiement échoué": "Paiement échoué",
+    "Paiement clôturé": "Paiement clôturé",
+    "Paiement déjà clôturé": "Paiement déjà clôturé",
+    "Votre paiement a déjà été clôturé. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre support pour une assistance rapide.": "Votre paiement a déjà été clôturé. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre support pour une assistance rapide."
+
+
 }

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\FlexpaieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
 
 class PaymentController extends Controller
 {
@@ -24,6 +25,8 @@ class PaymentController extends Controller
             $org          = $request->input('org');
             $country      = $request->input('country');
             $city         = $request->input('city');
+
+            $locale =  App::getLocale();
 
             // On récupère le statut anonyme envoyé par le front-end
             $isAnonymous  = $request->input('is_anonymous', false);
@@ -137,10 +140,11 @@ class PaymentController extends Controller
                 $result = $flex->cardPayment(
                     $amount,
                     $currency,
-                    route('payment.callback', ['code' => $transactionCode]),
-                    route('payment.success', ['code' => $transactionCode]),
-                    route('payment.cancel', ['code' => $transactionCode]),
-                    route('payment.decline', ['code' => $transactionCode]),
+                    route('payment.callback', ['code' => $transactionCode, 'locale' => $locale]),
+                    route('payment.success', ['code' => $transactionCode, 'locale' => $locale]),
+                    route('payment.cancel', ['code' => $transactionCode, 'locale' => $locale]),
+                    route('payment.decline', ['code' => $transactionCode, 'locale' => $locale]),
+                    $user->firstname . ' ' . $user->lastname
                 );
 
                 if (($result['code'] ?? null) == "0") {

@@ -97,5 +97,31 @@
     "Anonyme": "Anonymous",
     "Carte de Crédit / Débit": "Credit / Debit Card",
 
-    "Vérification du statut": "Verify Status"
+    "Vérification du statut": "Verify Status",
+    "Français": "French",
+    "Anglais": "English",
+
+    "Paiement annulé": "Payment Cancelled",
+
+    "Votre paiement a fait l'objet d'une annulation. Cela peut être dû à une action de votre part (annulation volontaire) ou à une interruption du processus de paiement (fermeture de la fenêtre, problème de connexion, etc.). Aucun fonds n'a été prélevé. Veuillez réessayer ou contacter notre support si le problème persiste.": "Your payment has been cancelled. This may be due to an action on your part (voluntary cancellation) or an interruption in the payment process (window closed, connection issue, etc.). No funds have been charged. Please try again or contact our support team if the problem persists.",
+
+    "Réessayer un autre paiement": "Try Another Payment",
+
+    "Paiement réussi": "Payment Successful",
+
+    "Merci pour votre générosité ! Votre paiement a été traité avec succès. Vous recevrez une confirmation par e-mail sous peu.": "Thank you for your generosity! Your payment has been processed successfully. You will receive a confirmation email shortly.",
+
+    "Effectuer un autre paiement": "Make Another Payment",
+
+    "Contacter l'assistance": "Contact Support",
+
+    "Plateforme Sécurisée VPOS": "Secure VPOS Platform",
+    "Échec du paiement": "Échec du paiement",
+    "Paiement échoué": "Paiement échoué",
+    "Paiement clôturé": "Payment Closed",
+
+    "Paiement déjà clôturé": "Payment Already Closed",
+
+    "Votre paiement a déjà été clôturé. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre support pour une assistance rapide.": "Your payment has already been closed. If you believe this is an error, please contact our support team for assistance."
+    
 }
