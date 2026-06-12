@@ -110,7 +110,7 @@ class PaymentController extends Controller
                     '243' . $phone,
                     $currency,
                     route('payment.callback', ['code' => $transactionCode]),
-                    $user->firstname . ' ' . $user->lastname
+                    $user->firstname . ' ' . $user->lastname . ', contact ' . $user->contact
                 );
 
                 if (($result['code'] ?? null) == "0") {
@@ -118,7 +118,7 @@ class PaymentController extends Controller
                     Transaction::create([
                         'user_id'        => $user->id,
                         'code'           => $transactionCode,
-                        'reference'      => $transactionCode,
+                        'reference'      => $reference,
                         'amount'         => $amount,
                         'currency'       => $currency,
                         'phone'          => $phone,
@@ -155,7 +155,7 @@ class PaymentController extends Controller
                     route('payment.success', ['code' => $transactionCode, 'locale' => $locale]),
                     route('payment.cancel', ['code' => $transactionCode, 'locale' => $locale]),
                     route('payment.decline', ['code' => $transactionCode, 'locale' => $locale]),
-                    $user->firstname . ' ' . $user->lastname
+                    $user->firstname . ' ' . $user->lastname . ', contact ' . $user->contact
                 );
 
                 if (($result['code'] ?? null) == "0") {
@@ -163,7 +163,7 @@ class PaymentController extends Controller
                     Transaction::create([
                         'user_id'        => $user->id,
                         'code'           => $transactionCode,
-                        'reference'      => $transactionCode,
+                        'reference'      => $reference,
                         'amount'         => $amount,
                         'currency'       => $currency,
                         'phone'          => null,
