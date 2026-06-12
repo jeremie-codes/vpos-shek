@@ -11,12 +11,7 @@ class FlexpaieService
 
     const SUCCESS = 0;
 
-    private function generateRandomCode(int $length = 6): string
-    {
-        return str_pad((string) random_int(0, 999999), $length, '0', STR_PAD_LEFT);
-    }
-
-    public function mobilePayment($amount, $phone, $currency, $callbackUrl, $sender): array
+    public function mobilePayment($reference, $amount, $phone, $currency, $callbackUrl, $sender): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
@@ -24,7 +19,7 @@ class FlexpaieService
         ])->post(self::BASE_URL, [
             'merchant' => 'SHEKINAH_TABERNACLE',
             'type' => "1",
-            'reference' => $this->generateRandomCode(6),
+            'reference' => $reference,
             'description' => "Don payé par $sender",
             'phone' => $phone,
             'amount' => $amount,
@@ -35,14 +30,14 @@ class FlexpaieService
         return $response->json();
     }
 
-    public function cardPayment($amount, $currency, $callbackUrl, $approveUrl, $cancelUrl, $declineUrl, $sender): array
+    public function cardPayment($reference, $amount, $currency, $callbackUrl, $approveUrl, $cancelUrl, $declineUrl, $sender): array
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.flexpay.token'),
             'Content-Type' => 'application/json',
         ])->post(self::BASE_URL, [
             'merchant' => 'SHEKINAH_TABERNACLE',
-            'reference' => $this->generateRandomCode(6),
+            'reference' => $reference,
             'amount' => $amount,
             'currency' => $currency,
             'type' => "2",

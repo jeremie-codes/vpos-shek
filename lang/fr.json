@@ -40,8 +40,6 @@
     "Numéro de téléphone mobile": "Numéro de téléphone mobile",
     "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).": "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).",
 
-    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).",
-
     "Confirmer": "Confirmer",
 
     "Statut du paiement": "Statut du paiement",
@@ -58,6 +56,8 @@
     "VALIDÉ": "VALIDÉ",
     "EN ATTENTE": "EN ATTENTE",
     "ÉCHOUÉ": "ÉCHOUÉ",
+
+    "Numero de contact": "Numero de contact",
 
     "Faire une nouvelle transaction": "Faire une nouvelle transaction",
 
@@ -76,6 +76,8 @@
     "Numéro invalide": "Numéro invalide",
     "Le numéro de téléphone doit contenir exactement 9 chiffres.": "Le numéro de téléphone doit contenir exactement 9 chiffres.",
 
+    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "Vous serez redirigé vers une page de paiement safeguardé pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).",
+    "En attente de la rédirection...": "En attente de la rédirection...",
     "Initialisation du paiement en cours...": "Initialisation du paiement en cours...",
     "Échec de l'initialisation": "Échec de l'initialisation",
     "Impossible de créer la transaction sur le serveur.": "Impossible de créer la transaction sur le serveur.",

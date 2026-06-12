@@ -27,6 +27,7 @@ class User extends Authenticatable
         'country_id',
         'city',
         'activated',
+        'contact',
         'email_verified_at',
     ];
 

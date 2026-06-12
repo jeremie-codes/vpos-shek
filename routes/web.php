@@ -6,7 +6,8 @@ use App\Models\Country;
 use App\Http\Middleware\SetLocale;
 
 Route::get('/', function () {
-    return redirect('/fr');
+    $locale = request()->getPreferredLanguage(['fr', 'en']);
+    return redirect('/' . $locale);
 });
 
 Route::prefix('{locale}')
@@ -15,7 +16,7 @@ Route::prefix('{locale}')
     ->group(function () {
 
         Route::get('/', function () {
-            $countries = Country::all();
+            $countries = Country::all()->sortBy('name');
 
             return view('index', compact('countries'));
         })->name('index');

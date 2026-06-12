@@ -40,8 +40,6 @@
     "Numéro de téléphone mobile": "Mobile Phone Number",
     "Saisir les 9 chiffres restants sans le premier 0 (exemple : 812345678).": "Enter the remaining 9 digits without the leading 0 (example: 812345678).",
 
-    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "You will be redirected to a secure payment page to enter your card details (card number, expiration date, CVV).",
-
     "Confirmer": "Confirm",
 
     "Statut du paiement": "Payment Status",
@@ -59,6 +57,7 @@
     "EN ATTENTE": "PENDING",
     "ÉCHOUÉ": "FAILED",
 
+    "Numero de contact": "Contact Number",
     "Faire une nouvelle transaction": "Make a new transaction",
 
     "Le délai de vérification a expiré": "Verification timeout",
@@ -76,7 +75,9 @@
     "Numéro invalide": "Invalid Number",
     "Le numéro de téléphone doit contenir exactement 9 chiffres.": "The phone number must contain exactly 9 digits.",
 
+    "Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).": "You will be redirected to a secure payment page to enter your card details (card number, expiration date, CVV).",
     "Initialisation du paiement en cours...": "Initializing Payment...",
+    "En attente de la rédirection...": "Waiting for redirection...",
     "Échec de l'initialisation": "Initialization Failed",
     "Impossible de créer la transaction sur le serveur.": "Unable to create the transaction on the server.",
 

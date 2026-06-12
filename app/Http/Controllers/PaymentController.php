@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\App;
 class PaymentController extends Controller
 {
 
+    private function generateRandomCode(int $length = 6): string
+    {
+        return str_pad((string) random_int(0, 999999), $length, '0', STR_PAD_LEFT);
+    }
+
     public function purchase(Request $request, FlexpaieService $flex)
     {
         try {
@@ -25,6 +30,7 @@ class PaymentController extends Controller
             $org          = $request->input('org');
             $country      = $request->input('country');
             $city         = $request->input('city');
+            $contact         = $request->input('contact');
 
             $locale =  App::getLocale();
 
@@ -33,6 +39,7 @@ class PaymentController extends Controller
 
             // Générer un code unique transaction
             $transactionCode = 'TRX-' . strtoupper(uniqid());
+            $reference = 'REF-' . $this->generateRandomCode(12);
 
             /*
             |--------------------------------------------------------------------------
@@ -78,6 +85,7 @@ class PaymentController extends Controller
                         'country_id' => $country,
 						'phone' => $phone ?? null,
                         'city'       => $city,
+                        'contact'    => $contact,
                     ]
                 );
             }
@@ -97,6 +105,7 @@ class PaymentController extends Controller
                 }
 
                 $result = $flex->mobilePayment(
+                    $reference,
                     $amount,
                     '243' . $phone,
                     $currency,
@@ -109,6 +118,7 @@ class PaymentController extends Controller
                     Transaction::create([
                         'user_id'        => $user->id,
                         'code'           => $transactionCode,
+                        'reference'      => $transactionCode,
                         'amount'         => $amount,
                         'currency'       => $currency,
                         'phone'          => $phone,
@@ -138,6 +148,7 @@ class PaymentController extends Controller
             if ($method == "card") {
 
                 $result = $flex->cardPayment(
+                    $reference,
                     $amount,
                     $currency,
                     route('payment.callback', ['code' => $transactionCode, 'locale' => $locale]),
@@ -152,6 +163,7 @@ class PaymentController extends Controller
                     Transaction::create([
                         'user_id'        => $user->id,
                         'code'           => $transactionCode,
+                        'reference'      => $transactionCode,
                         'amount'         => $amount,
                         'currency'       => $currency,
                         'phone'          => null,

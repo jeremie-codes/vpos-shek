@@ -273,7 +273,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
-                                <input type="text" id="donor_name" required placeholder="Jean-Claude"
+                                <input type="text" id="donor_name" required placeholder="---"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
@@ -286,7 +286,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-user"></i>
                                 </div>
-                                <input type="text" id="donor_last_name" required placeholder="Kabongo"
+                                <input type="text" id="donor_last_name" required placeholder="---"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
                                     <i class="text-xs fa-regular fa-envelope"></i>
                                 </div>
-                                <input type="email" id="donor_email" placeholder="jean.claude@gmail.com"
+                                <input type="email" id="donor_email" placeholder="---"
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
@@ -311,8 +311,8 @@
                                 <select id="donor_org" required
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                                     <option value="">{{ __('Choisir une organisation') }}</option>
-                                    <option value="CD">Shekinah</option>
-                                    <option value="FR">{{ __('Autres') }}</option>
+                                    <option value="Shekinah">Shekinah</option>
+                                    <option value="Autres">{{ __('Autres') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -346,6 +346,19 @@
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
+
+                        <div class="dynamic-view-panel active">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Numero de contact') }} :
+                                {{-- <span class="text-red-500">*</span></label> --}}
+                            <div class="relative rounded-lg shadow-sm">
+                                <div
+                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
+                                    <i class="text-xs fa-solid fa-phone"></i>
+                                </div>
+                                <input type="text" id="donor_contact" required placeholder="{{ __('Ex: 243 810 000 000') }}"
+                                    class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -364,7 +377,7 @@
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10
                             <span>$</span></button>
                         <button type="button" onclick="setPresetValue(25, this)"
-                            class="p-1 text-sm font-semibold text-blue-800 transition-all border-blue-500 shadow-inner preset-btn dynamic-view-panel active bg-blue-50 rounded-xl ring-1 ring-blue-500/20">25
+                            class="p-1 text-sm font-semibold text-slate-800 transition-all border-slate-500 shadow-inner preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25
                             <span>$</span></button>
                         <button type="button" onclick="setPresetValue(50, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50
@@ -382,7 +395,7 @@
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10.000
                             <span>FC</span></button>
                         <button type="button" onclick="setPresetValue(25000, this)"
-                            class="p-1 text-sm font-semibold text-blue-800 transition-all border-blue-500 shadow-inner preset-btn dynamic-view-panel active bg-blue-50 rounded-xl ring-1 ring-blue-500/20">25.000
+                            class="p-1 text-sm font-semibold text-slate-800 transition-all border-slate-500 shadow-inner preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25.000
                             <span>FC</span></button>
                         <button type="button" onclick="setPresetValue(50000, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50.000
@@ -397,13 +410,12 @@
 
                     <div class="grid items-center grid-cols-3 gap-4">
                         <div class="col-span-2 dynamic-view-panel active">
-                            <label id="amount_input_label" class="block mb-1 text-xs font-semibold text-slate-500">
+                            <label id="amount_input_label" class="block mb-1 text-md font-semibold text-red-500">
                                 {{ __('Ou saisir le montant de votre choix') }}  (<span class="currency-label">USD</span>)</label>
                             <div class="relative rounded-lg shadow-sm">
-                                <input type="number" id="custom_amount_input" min="1"
+                                <input type="number" id="custom_amount_input" min="1" required
                                     placeholder="{{ __('Saisir le montant') }}..." oninput="updateCustomAmountValue(this.value)"
-                                    class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
-                                    value="25">
+                                    class="block w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                             </div>
                         </div>
                         <div class="dynamic-view-panel active">
@@ -563,7 +575,7 @@
                 </div>
 
                 <!-- LOADING/PROCESSING MODULE -->
-                <div id="modal_loading_view" class="flex flex-col items-center">
+                <div id="modal_loading_view_phone" class="flex flex-col items-center">
                     <div class="w-16 h-16 mb-3 border-4 rounded-full border-slate-200 border-t-blue-600 animate-spin">
                     </div>
                     <h4 class="font-bold text-md text-slate-900 font-outfit">{{ __("Saisie PIN Mobile Money requise...") }}</h4>
@@ -573,6 +585,19 @@
                     <div id="loading_notice"
                         class="mt-4 bg-slate-50 animate-pulse text-[10px] text-slate-700 border border-slate-200 px-3.5 py-2 rounded-lg font-mono">
                         {{ __("En attente de la réponse de l'opérateur...") }}
+                    </div>
+                </div>
+
+                <div id="modal_loading_view_card" class="flex flex-col items-center">
+                    <div class="w-16 h-16 mb-3 border-4 rounded-full border-slate-200 border-t-blue-600 animate-spin">
+                    </div>
+                    <h4 class="font-bold text-md text-slate-900 font-outfit">{{ __("Initialisation du paiement en cours...") }}</h4>
+                    <p class="text-slate-500 text-xs max-w-sm mt-1.5 leading-relaxed">
+                        {{ __("Vous serez redirigé vers une page de paiement sécurisée pour saisir les détails de votre carte bancaire (numéro, date d'expiration, CVV).") }}
+                    </p>
+                    <div id="loading_notice"
+                        class="mt-4 bg-slate-50 animate-pulse text-[10px] text-slate-700 border border-slate-200 px-3.5 py-2 rounded-lg font-mono">
+                        {{ __("En attente de la rédirection...") }}
                     </div>
                 </div>
             </div>
@@ -764,7 +789,7 @@
             'CDF': 'FC',
         };
 
-        function toggleAnonymousPayment(isAnonymous) {
+         window.toggleAnonymousPayment = function(isAnonymous) {
             const container = document.getElementById('personal_fields_container');
             const fieldsToToggle = [
                 'donor_name',
@@ -772,7 +797,8 @@
                 'donor_email',
                 'donor_org',
                 'donor_country',
-                'donor_city'
+                'donor_city',
+                'donor_contact'
             ];
 
             if (isAnonymous) {
@@ -834,12 +860,12 @@
             const buttons = document.querySelectorAll('.preset-btn');
             buttons.forEach(btn => {
                 btn.className =
-                    "preset-btn py-2.5 px-2 text-sm font-bold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all";
+                    "preset-btn py-1 px-2 text-sm font-bold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all";
             });
 
             if (buttonElement) {
                 buttonElement.className =
-                    "preset-btn py-2.5 px-2 text-sm font-bold bg-blue-50 border-blue-500 text-blue-800 rounded-xl transition-all font-semibold shadow-inner ring-1 ring-blue-500/20";
+                    "preset-btn py-1 px-2 text-sm font-bold bg-blue-50 border border-blue-500 text-blue-800 rounded-xl transition-all font-semibold shadow-inner ring-1 ring-blue-500/20";
             }
 
             document.getElementById('custom_amount_input').value = amount;
@@ -858,10 +884,10 @@
                 buttons.forEach((btn, idx) => {
                     if (presetAmounts[idx] === chosenPaymentAmount) {
                         btn.className =
-                            "preset-btn py-2.5 px-2 text-sm font-bold bg-blue-50 border-blue-500 text-blue-800 rounded-xl transition-all font-semibold shadow-inner ring-1 ring-blue-500/20";
+                            "preset-btn py-1 px-2 text-sm font-bold border bg-blue-50 border-blue-500 text-blue-800 rounded-xl transition-all font-semibold shadow-inner ring-1 ring-blue-500/20";
                     } else {
                         btn.className =
-                            "preset-btn py-2.5 px-2 text-sm font-bold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all";
+                            "preset-btn py-1 px-2 text-sm font-bold bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all";
                     }
                 });
             }
@@ -923,6 +949,7 @@
             const donorOrg = isAnonymous ? null : document.getElementById('donor_org').value;
             const donorCountry = isAnonymous ? null : document.getElementById('donor_country').value;
             const donorCity = isAnonymous ? null : document.getElementById('donor_city').value;
+            const donorContact = isAnonymous ? null : document.getElementById('donor_contact').value;
             const phone = document.getElementById('mobile_phone').value;
 
             if (activePaymentMethod === 'mobile' && phone.length !== 9) {
@@ -931,13 +958,26 @@
             }
 
             const modal = document.getElementById('status_modal');
-            const modalLoading = document.getElementById('modal_loading_view');
+            const modalLoadingPhone = document.getElementById('modal_loading_view_phone');
+            const modalLoadingCard = document.getElementById('modal_loading_view_card');
             const modalStatus = document.getElementById('modal_status_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
 
+            if(activePaymentMethod === 'card') {
+                modalLoadingCard.classList.remove('hidden');
+                modalLoadingCard.classList.add('flex');
+                modalLoadingPhone.classList.remove('flex');
+                modalLoadingPhone.classList.add('hidden');
+            }
+
+            if(activePaymentMethod === 'mobile') {
+                modalLoadingPhone.classList.remove('hidden');
+                modalLoadingPhone.classList.add('flex');
+                modalLoadingCard.classList.remove('flex');
+                modalLoadingCard.classList.add('hidden');
+            }
+
             modal.classList.remove('hidden');
-            modalLoading.classList.add('flex');
-            modalLoading.classList.remove('hidden');
             modalStatus.classList.add('hidden');
             modalStatus.classList.remove('flex');
             modalTimeout.classList.add('hidden');
@@ -963,7 +1003,8 @@
                         email: donorEmail,
                         org: donorOrg,
                         country: donorCountry,
-                        city: donorCity
+                        city: donorCity,
+                        contact: donorContact
                     })
                 })
                 .then(res => res.json())
@@ -998,14 +1039,17 @@
             const maxAttempts = 4; // Augmenté à 12 pour atteindre ~60s réelles si delay = 5s
             const delay = 5000;
 
-            const modalLoading = document.getElementById('modal_loading_view');
+            const modalLoadingPhone = document.getElementById('modal_loading_view_phone');
+            const modalLoadingCard = document.getElementById('modal_loading_view_card');
             const modalTimeout = document.getElementById('modal_timeout_view');
             const modalStatus = document.getElementById('modal_status_view');
             const processingNotice = document.getElementById('loading_notice');
 
             // Assurer que la vue loading est active pendant le polling
-            modalLoading.classList.remove('hidden');
-            modalLoading.classList.add('flex');
+            modalLoadingPhone.classList.remove('hidden');
+            modalLoadingPhone.classList.add('flex');
+            modalLoadingCard.classList.remove('flex');
+            modalLoadingCard.classList.add('hidden');
             modalTimeout.classList.add('hidden');
             modalStatus.classList.add('hidden');
 
@@ -1059,13 +1103,16 @@
 
         function showModalFinalState(isSuccess, title, orderNumber, errorMessage = "") {
             const modal = document.getElementById('status_modal');
-            const modalLoading = document.getElementById('modal_loading_view');
+            const modalLoadingPhone = document.getElementById('modal_loading_view_phone');
+            const modalLoadingCard = document.getElementById('modal_loading_view_card');
             const modalStatus = document.getElementById('modal_status_view');
             const modalTimeout = document.getElementById('modal_timeout_view');
 
             modal.classList.remove('hidden');
-            modalLoading.classList.add('hidden');
-            modalLoading.classList.remove('flex');
+            modalLoadingPhone.classList.add('hidden');
+            modalLoadingPhone.classList.remove('flex');
+            modalLoadingCard.classList.remove('flex');
+            modalLoadingCard.classList.add('hidden');
             modalStatus.classList.remove('hidden');
             modalStatus.classList.add('flex');
             modalTimeout.classList.add('hidden');
@@ -1142,13 +1189,16 @@
 
         function showModalTimeoutState(orderNumber, customMsg = "") {
             const modal = document.getElementById('status_modal');
-            const modalLoading = document.getElementById('modal_loading_view');
+            const modalLoadingPhone = document.getElementById('modal_loading_view_phone');
+            const modalLoadingCard = document.getElementById('modal_loading_view_card');
             const modalTimeout = document.getElementById('modal_timeout_view');
             const modalStatus = document.getElementById('modal_status_view');
 
             modal.classList.remove('hidden');
-            modalLoading.classList.add('hidden');
-            modalLoading.classList.remove('flex');
+            modalLoadingPhone.classList.add('hidden');
+            modalLoadingPhone.classList.remove('flex');
+            modalLoadingCard.classList.remove('flex');
+            modalLoadingCard.classList.add('hidden');
             modalStatus.classList.add('hidden');
             modalStatus.classList.remove('flex');
             modalTimeout.classList.remove('hidden');
@@ -1168,7 +1218,8 @@
             document.getElementById('status_modal').classList.add('hidden');
             resetInitState()
 
-            const modalLoading = document.getElementById('modal_loading_view');
+            const modalLoadingPhone = document.getElementById('modal_loading_view_phone');
+            const modalLoadingCard = document.getElementById('modal_loading_view_card');
             const labelContainer = document.getElementById('loading_notice');
             if (labelContainer) {
                 labelContainer.className =
@@ -1179,8 +1230,10 @@
             document.getElementById('modal_status_view').classList.add('hidden');
             document.getElementById('modal_status_view').classList.remove('flex');
 
-            modalLoading.classList.remove('hidden');
-            modalLoading.classList.add('flex');
+            modalLoadingPhone.classList.remove('hidden');
+            modalLoadingPhone.classList.add('flex');
+            modalLoadingCard.classList.remove('flex');
+            modalLoadingCard.classList.add('hidden');
 
             const donationForm = document.getElementById('donationForm');
             if (donationForm) {
