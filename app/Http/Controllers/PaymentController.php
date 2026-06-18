@@ -27,7 +27,7 @@ class PaymentController extends Controller
             $firstname    = $request->input('firstname');
             $lastname     = $request->input('lastname');
             $email        = $request->input('email');
-            $org          = $request->input('org');
+            //$org          = $request->input('org');
             $country      = $request->input('country');
             $city         = $request->input('city');
             $contact         = $request->input('contact');
@@ -81,7 +81,7 @@ class PaymentController extends Controller
                     [
                         'firstname'  => $firstname,
                         'lastname'   => $lastname,
-                        'org'        => $org,
+                        'org'        => null,
                         'country_id' => $country,
 						'phone' => $phone ?? null,
                         'city'       => $city,

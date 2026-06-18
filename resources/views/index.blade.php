@@ -304,7 +304,7 @@
                             </div>
                         </div>
 
-                        <div class="dynamic-view-panel active">
+                        {{-- <div class="dynamic-view-panel active">
                             <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Organisation') }} : <span
                                     class="text-red-500">*</span></label>
                             <div class="relative rounded-lg shadow-sm">
@@ -315,7 +315,7 @@
                                     <option value="Autres">{{ __('Autres') }}</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="dynamic-view-panel active">
                             <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Pays') }} : <span
@@ -349,7 +349,8 @@
 
                         <div class="dynamic-view-panel active">
                             <label class="block text-xs font-semibold text-slate-600 mb-1.5">{{ __('Numero de contact') }} :
-                                {{-- <span class="text-red-500">*</span></label> --}}
+                                {{-- <span class="text-red-500">*</span> --}}
+                            </label>
                             <div class="relative rounded-lg shadow-sm">
                                 <div
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-700">
@@ -795,7 +796,7 @@
                 'donor_name',
                 'donor_last_name',
                 'donor_email',
-                'donor_org',
+                // 'donor_org',
                 'donor_country',
                 'donor_city',
                 'donor_contact'
@@ -946,7 +947,7 @@
             const donorName = isAnonymous ? null : document.getElementById('donor_name').value;
             const donorLastName = isAnonymous ? null : document.getElementById('donor_last_name').value;
             const donorEmail = isAnonymous ? null : document.getElementById('donor_email').value;
-            const donorOrg = isAnonymous ? null : document.getElementById('donor_org').value;
+            // const donorOrg = isAnonymous ? null : document.getElementById('donor_org').value;
             const donorCountry = isAnonymous ? null : document.getElementById('donor_country').value;
             const donorCity = isAnonymous ? null : document.getElementById('donor_city').value;
             const donorContact = isAnonymous ? null : document.getElementById('donor_contact').value;
@@ -1001,7 +1002,7 @@
                         firstname: donorName,
                         lastname: donorLastName,
                         email: donorEmail,
-                        org: donorOrg,
+                        //org: donorOrg,
                         country: donorCountry,
                         city: donorCity,
                         contact: donorContact
