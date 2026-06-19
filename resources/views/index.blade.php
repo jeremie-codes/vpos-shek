@@ -328,7 +328,7 @@
                                     class="block w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all">
                                     <option value="">{{ __('Choisir un pays') }}</option>
                                     @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->id }}">{{ $country->display_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -378,7 +378,7 @@
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10
                             <span>$</span></button>
                         <button type="button" onclick="setPresetValue(25, this)"
-                            class="p-1 text-sm font-semibold text-slate-800 transition-all border-slate-500 shadow-inner preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25
+                            class="p-1 text-sm font-semibold transition-all shadow-inner text-slate-800 border-slate-500 preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25
                             <span>$</span></button>
                         <button type="button" onclick="setPresetValue(50, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50
@@ -396,7 +396,7 @@
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">10.000
                             <span>FC</span></button>
                         <button type="button" onclick="setPresetValue(25000, this)"
-                            class="p-1 text-sm font-semibold text-slate-800 transition-all border-slate-500 shadow-inner preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25.000
+                            class="p-1 text-sm font-semibold transition-all shadow-inner text-slate-800 border-slate-500 preset-btn dynamic-view-panel active bg-slate-50 rounded-xl ring-1 ring-slate-500/20">25.000
                             <span>FC</span></button>
                         <button type="button" onclick="setPresetValue(50000, this)"
                             class="p-1 text-sm font-semibold transition-all border preset-btn dynamic-view-panel active bg-slate-50 border-slate-200 rounded-xl hover:bg-slate-100">50.000
@@ -411,7 +411,7 @@
 
                     <div class="grid items-center grid-cols-3 gap-4">
                         <div class="col-span-2 dynamic-view-panel active">
-                            <label id="amount_input_label" class="block mb-1 text-md font-semibold text-red-500">
+                            <label id="amount_input_label" class="block mb-1 font-semibold text-red-500 text-md">
                                 {{ __('Ou saisir le montant de votre choix') }}  (<span class="currency-label">USD</span>)</label>
                             <div class="relative rounded-lg shadow-sm">
                                 <input type="number" id="custom_amount_input" min="1" required

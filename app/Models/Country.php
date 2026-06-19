@@ -10,4 +10,10 @@ class Country extends Model
 
     protected $fillable = ['name', 'code'];
 
+    public function getDisplayNameAttribute()
+    {
+        return app()->getLocale() === 'en'
+            ? ($this->name_en ?: $this->name)
+            : $this->name;
+    }
 }
